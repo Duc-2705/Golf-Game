@@ -1,8 +1,12 @@
 #include "Game.h"
+#include "TextureManager..h"
 
 Game::Game() {}
-
 Game::~Game() {}
+
+SDL_Texture* Game::texture = nullptr;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 void Game::init(const char* title, int width, int height, bool fullscreen)
 {
@@ -20,7 +24,12 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
 		isRunning = true;
 	}
-	else std::cout << "Unable to init" << std::endl;
+	
+	texture = TextureManager::LoadTexture("assets/ball.png");
+	TextureManager::setSrcRect(texture, srcRect);
+	destRect.x = destRect.y = 300;
+	destRect.w = destRect.h = 64;
+
 }
 
 void Game::handleEvents()
@@ -45,9 +54,9 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
+	
 
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	SDL_RenderDrawLine(renderer, 10, 10, 200, 200);
+	TextureManager::Draw(Game::texture, srcRect, destRect);
 
 	SDL_RenderPresent(renderer);
 }
@@ -56,5 +65,6 @@ void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyTexture(texture);
 	SDL_Quit();
 }

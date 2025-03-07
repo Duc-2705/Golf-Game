@@ -7,9 +7,14 @@ int main(int argc, char* argv[])
 	game = new Game();
 
 	game->init("Golf game", 800, 640, false);
-	game->render();
-	SDL_Delay(3000);
-	game->handleEvents();
+	
+	while (game->running())
+	{
+		game->handleEvents();
+		game->update();
+		game->render();
+	}
+
 	game->clean();
 
 	delete game;

@@ -10,9 +10,12 @@ private:
 	bool isRunning = false;
 	
 	SDL_Window* window;
-	SDL_Renderer* renderer;
 	SDL_Event event;
+	SDL_Rect srcRect, destRect;
 public:
+	static SDL_Renderer* renderer;
+	static SDL_Texture* texture;
+
 	Game();
 	~Game();
 
