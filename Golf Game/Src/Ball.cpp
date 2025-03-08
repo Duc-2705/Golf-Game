@@ -26,7 +26,6 @@ void Ball::update()
 	destBall.x = xpos;
 	destBall.y = ypos;
 	
-	xpos++;
 }
 
 void Ball::render()

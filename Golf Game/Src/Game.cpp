@@ -6,6 +6,7 @@ Game::Game() {}
 Game::~Game() {}
 
 Ball* ball = new Ball();
+int xMouse, yMouse;
 
 SDL_Texture* Game::texture = nullptr;
 SDL_Event Game::event;
@@ -37,6 +38,14 @@ void Game::handleEvents()
 
 	switch (event.type)
 	{
+	case SDL_MOUSEBUTTONDOWN:
+		SDL_GetMouseState(&xMouse, &yMouse);
+		std::cout << xMouse << " " << yMouse << std::endl;
+		break;
+	case SDL_MOUSEBUTTONUP:
+		SDL_GetMouseState(&xMouse, &yMouse);
+		std::cout << xMouse << " " << yMouse << std::endl;
+		break;
 	case SDL_QUIT:
 		isRunning = false;
 		break;
