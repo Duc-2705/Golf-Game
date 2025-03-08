@@ -1,6 +1,7 @@
 #include "Ball.h"
 #include "TextureManager..h"
 #include "Game.h"
+#include "Vector2D.h"
 
 Ball::Ball() {}
 
