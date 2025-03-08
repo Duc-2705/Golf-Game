@@ -12,6 +12,12 @@ public:
 		y = 0.0f;
 	}
 
+	Vector2D(int x, int y)
+	{
+		this->x = static_cast<float>(x);
+		this->y = static_cast<float>(y);
+	}
+
 	Vector2D(float x, float y) : x(x), y(y) {};
 
 	friend Vector2D operator+ (const Vector2D& v1, const Vector2D& v2);

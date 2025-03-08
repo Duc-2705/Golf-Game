@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Cursor.h"
 #include "Game.h"
 #include "Vector2D.h"
-
 
 class Ball
 {
@@ -19,6 +19,9 @@ private:
 
 	SDL_Rect srcBall, destBall;
 	SDL_Texture* texBall = nullptr;
+
+	Cursor* cursor;
+
 public:
 	Ball();
 	~Ball();
