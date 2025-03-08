@@ -17,7 +17,6 @@ private:
 public:
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
-	static SDL_Texture* texture;
 
 	Game();
 	~Game();

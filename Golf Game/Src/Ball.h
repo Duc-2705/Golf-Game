@@ -15,7 +15,7 @@ private:
 	Vector2D acceleration;
 
 	const float dTime = 0.016f; //thoi gian 1 frame
-	const float FRICTION = -80.0f; //Ma sat
+	const float FRICTION = -80.0f; //Ma sat, giam toc
 
 	SDL_Rect srcBall, destBall;
 	SDL_Texture* texBall = nullptr;
@@ -26,6 +26,8 @@ public:
 	void init();
 
 	void update();
+
+	void motion();
 
 	void render();
 };

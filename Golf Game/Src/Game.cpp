@@ -8,7 +8,6 @@ Game::~Game() {}
 Ball* ball = new Ball();
 int xMouse, yMouse;
 
-SDL_Texture* Game::texture = nullptr;
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -57,6 +56,7 @@ void Game::handleEvents()
 void Game::update()
 {
 	ball->update();
+	ball->motion();
 }
 
 void Game::render()
@@ -73,6 +73,5 @@ void Game::clean()
 	delete ball;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	SDL_DestroyTexture(texture);
 	SDL_Quit();
 }
