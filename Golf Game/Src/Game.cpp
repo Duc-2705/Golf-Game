@@ -1,11 +1,14 @@
 #include "Game.h"
 #include "TextureManager..h"
+#include "Ball.h"
 
 Game::Game() {}
 Game::~Game() {}
 
-SDL_Texture* Game::texture = nullptr;
+Ball* ball = new Ball();
 
+SDL_Texture* Game::texture = nullptr;
+SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
 
 void Game::init(const char* title, int width, int height, bool fullscreen)
@@ -15,21 +18,17 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flag);
+		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, flag);
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255 ,255);
 		}
 
 		isRunning = true;
 	}
-	
-	texture = TextureManager::LoadTexture("assets/ball.png");
-	TextureManager::setSrcRect(texture, srcRect);
-	destRect.x = destRect.y = 300;
-	destRect.w = destRect.h = 64;
 
+	ball->init();
 }
 
 void Game::handleEvents()
@@ -48,21 +47,21 @@ void Game::handleEvents()
 
 void Game::update()
 {
-
+	ball->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	
 
-	TextureManager::Draw(Game::texture, srcRect, destRect);
+	ball->render();
 
 	SDL_RenderPresent(renderer);
 }
 
 void Game::clean()
 {
+	delete ball;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyTexture(texture);
