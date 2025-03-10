@@ -19,10 +19,9 @@ void Ball::init()
 	cursor = new Cursor();
 
 	velocity.Zero();
-	acceleration.Zero();
 	
-	position.x = 300.0f;
-	position.y = 300.0f;
+	position.x = static_cast<float>(WINDOW_WIDTH/2 - BALL_WIDTH/2);
+	position.y = static_cast<float>(WINDOW_HEIGHT/2 -BALL_HEIGHT/2);
 
 	destBall.w = static_cast<float>(BALL_WIDTH);
 	destBall.h = static_cast<float>(BALL_HEIGHT);
@@ -37,62 +36,49 @@ void Ball::update()
 
 	if (cursor->isPulling())
 	{
-		velocity = cursor->Force() * (-1);
-		std::cout << cursor->Force() << std::endl;
+		velocity.magnitude = cursor->Force().magnitude; // Do lon cua Force
+		velocity.i = - (cursor->Force().x / cursor->Force().magnitude); // Vector don vi cua Force chieu len Ox
+		velocity.j = - (cursor->Force().y / cursor->Force().magnitude); // Vector don vi cua Force chieu len Oy
 	}
 
-	acceleration.x = (velocity.x > 0) ? FRICTION : - FRICTION; // acceleration luon nguoc dau voi velocity
-	acceleration.y = (velocity.y > 0) ? FRICTION : - FRICTION;
-
-	std::cout << velocity << std::endl;
+	std::cout << velocity.i << " " << velocity.j << " " << velocity.magnitude << std::endl;
 }
 
 void Ball::motion()
 {
-	if (velocity.x > 0)
+	if (velocity.magnitude > 0)
 	{
-		velocity.x += acceleration.x * dTime;
-		if (velocity.x < 0) velocity.x = 0.0f;
-	}
-	else if (velocity.x < 0)
-	{
-		velocity.x += acceleration.x * dTime;
-		if (velocity.x > 0) velocity.x = 0.0f;
+		velocity.magnitude += FRICTION * dTime; // Giam do lon cua van toc
+		if (velocity.magnitude < 0) velocity.Zero();
 	}
 
-	if (velocity.y > 0)
-	{
-		velocity.y += acceleration.y * dTime;
-		if (velocity.y < 0) velocity.y = 0.0f;
-	}
-	else if (velocity.y < 0)
-	{
-		velocity.y += acceleration.y * dTime;
-		if (velocity.y > 0) velocity.y = 0.0f;
-	}
-
-	position += (velocity * dTime);
+	position.x += velocity.i * velocity.magnitude * dTime;
+	position.y += velocity.j * velocity.magnitude * dTime;
 
 	if (position.x + destBall.w > WINDOW_WIDTH)
 	{
 		position.x = static_cast<float> ( WINDOW_WIDTH - destBall.w);
-		velocity.x *= REFLECT; //Doi chieu va giam nang luong
+		velocity.i *= -1.0f; //Doi chieu do va cham
+		velocity.magnitude *= LOSS; //Giam nang luong do va cham
 	}
 	else if (position.x < 0)
 	{
 		position.x = 0.0f;
-		velocity.x *= REFLECT;
+		velocity.i *= -1.0f;
+		velocity.magnitude *= LOSS;
 	}
 
 	if (position.y + destBall.h > WINDOW_HEIGHT)
 	{
 		position.y = static_cast<float> (WINDOW_HEIGHT - destBall.h);
-		velocity.y *= REFLECT;
+		velocity.j *= -1.0f;
+		velocity.magnitude *= LOSS;
 	}
 	else if (position.y < 0)
 	{
 		position.y = 0.0f;
-		velocity.y *= REFLECT;
+		velocity.j *= -1.0f;
+		velocity.magnitude *= LOSS;
 	}	
 
 }
