@@ -9,6 +9,6 @@ public:
 
 	static void setSrcRect(SDL_Texture* texture, SDL_Rect& src);
 
-	static void Draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
+	static void Draw(SDL_Texture* texture, SDL_Rect src, SDL_FRect dest);
 
 };

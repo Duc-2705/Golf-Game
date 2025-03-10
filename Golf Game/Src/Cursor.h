@@ -5,10 +5,8 @@
 class Cursor
 {
 private:
-	int xMouseDown = 0, yMouseDown = 0;
-	int xMouseUp = 0, yMouseUp = 0;
-
-	Vector2D force;
+	int xMouseDown, yMouseDown;
+	int xMouseUp, yMouseUp;
 
 	bool checkPulling = false;
 

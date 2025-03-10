@@ -12,7 +12,7 @@ Ball::~Ball()
 
 void Ball::init()
 {
-	texBall = TextureManager::LoadTexture("assets/ball.png");
+	texBall = TextureManager::LoadTexture("assets/BouncingBall.png");
 
 	TextureManager::setSrcRect(texBall, srcBall);
 
@@ -20,30 +20,31 @@ void Ball::init()
 
 	velocity.Zero();
 	acceleration.Zero();
-
 	
-	position.x = 300;
-	position.y = 300;
+	position.x = 300.0f;
+	position.y = 300.0f;
 
-	destBall.w = BALL_HEIGHT;
-	destBall.h = BALL_HEIGHT;
+	destBall.w = static_cast<float>(BALL_WIDTH);
+	destBall.h = static_cast<float>(BALL_HEIGHT);
 }
 
 void Ball::update()
 {
-	destBall.x = static_cast<int>(position.x);
-	destBall.y = static_cast<int>(position.y);
+	destBall.x = position.x;
+	destBall.y = position.y;
 
 	cursor->handleEvents();
 
 	if (cursor->isPulling())
 	{
 		velocity = cursor->Force() * (-1);
-		acceleration.x = (velocity.x > 0) ? FRICTION : - FRICTION; // acceleration luon nguoc dau voi velocity
-		acceleration.y = (velocity.y > 0) ? FRICTION : - FRICTION;
 		std::cout << cursor->Force() << std::endl;
 	}
 
+	acceleration.x = (velocity.x > 0) ? FRICTION : - FRICTION; // acceleration luon nguoc dau voi velocity
+	acceleration.y = (velocity.y > 0) ? FRICTION : - FRICTION;
+
+	std::cout << velocity << std::endl;
 }
 
 void Ball::motion()
@@ -74,24 +75,24 @@ void Ball::motion()
 
 	if (position.x + destBall.w > WINDOW_WIDTH)
 	{
-		velocity.x = 0.0f;
 		position.x = static_cast<float> ( WINDOW_WIDTH - destBall.w);
+		velocity.x *= REFLECT; //Doi chieu va giam nang luong
 	}
 	else if (position.x < 0)
 	{
-		velocity.x = 0.0f;
 		position.x = 0.0f;
+		velocity.x *= REFLECT;
 	}
 
 	if (position.y + destBall.h > WINDOW_HEIGHT)
 	{
-		velocity.y = 0.0f;
 		position.y = static_cast<float> (WINDOW_HEIGHT - destBall.h);
+		velocity.y *= REFLECT;
 	}
 	else if (position.y < 0)
 	{
-		velocity.y = 0.0f;
 		position.y = 0.0f;
+		velocity.y *= REFLECT;
 	}	
 
 }

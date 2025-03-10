@@ -7,8 +7,8 @@
 class Ball
 {
 private:
-	const int BALL_WIDTH = 64;
-	const int BALL_HEIGHT = 64;
+	const int BALL_WIDTH = 30.0;
+	const int BALL_HEIGHT = 30.0;
 
 	Vector2D position;
 	Vector2D velocity;
@@ -16,11 +16,14 @@ private:
 
 	const float dTime = 0.016f; //thoi gian 1 frame
 	const float FRICTION = -80.0f; //Ma sat, giam toc
+	const float REFLECT = -0.5f; // Phan xa va giam nang luong
 
-	SDL_Rect srcBall, destBall;
+	SDL_Rect srcBall;
+	SDL_FRect destBall;
+
 	SDL_Texture* texBall = nullptr;
 
-	Cursor* cursor;
+	Cursor* cursor = nullptr;
 
 public:
 	Ball();

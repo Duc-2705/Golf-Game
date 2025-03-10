@@ -16,7 +16,7 @@ void TextureManager::setSrcRect(SDL_Texture* texture, SDL_Rect& src)
 	SDL_QueryTexture(texture, nullptr, nullptr, &(src.w), &(src.h)); //Lay kich thuoc anh goc
 }
 
-void TextureManager::Draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest)
+void TextureManager::Draw(SDL_Texture* texture, SDL_Rect src, SDL_FRect dest)
 {
-	SDL_RenderCopy(Game::renderer, texture, nullptr, &dest);
+	SDL_RenderCopyF(Game::renderer, texture, &src, &dest);
 }
