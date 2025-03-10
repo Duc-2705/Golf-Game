@@ -7,6 +7,10 @@
 class Hole
 {
 private:
+	Vector2D velocity;
+
+	float speed = 0.0f;
+
 	SDL_Texture* texHole = nullptr;
 
 	SDL_Rect srcHole;
@@ -14,12 +18,14 @@ private:
 public:
 	Vector2D position;
 
-	Hole() {};
+	Hole(float speed) : speed(speed) {};
 	~Hole() { SDL_DestroyTexture(texHole); };
 
 	void init();
 
 	void update();
+
+	void motion();
 
 	void render();
 };

@@ -7,7 +7,7 @@ Game::Game() {}
 Game::~Game() {}
 
 Ball* ball = new Ball();
-Hole* hole = new Hole();
+Hole* hole = new Hole(5.0f);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -51,17 +51,25 @@ void Game::update()
 {
 	hole->update();
 
-	ball->update();
-	std::cout << std::fabs(ball->position.x - hole->position.x) << " " <<
-				 std::fabs(ball->position.y - hole->position.y) << std::endl;
+	if (!win)
+	{
+		ball->update();
+		std::cout << std::fabs(ball->position.x - hole->position.x) << " " <<
+			std::fabs(ball->position.y - hole->position.y) << std::endl;
+	}
 	
-	if (std::fabs(ball->position.x - hole->position.x) <= 5  &&
+	if (!win &&
+		std::fabs(ball->position.x - hole->position.x) <= 5  &&
 		std::fabs(ball->position.y - hole->position.y) <= 5)
 	{
-		isRunning = false;
+		win = true;
+		ball = nullptr;
+		std::cout << "Congratulation!!" << std::endl;
 	}
 
-	ball->motion();
+	if (!win) ball->motion();
+	
+	hole->motion();
 }
 
 void Game::render()
@@ -69,7 +77,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	hole->render();
-	ball->render();
+	if (!win) ball->render();
 
 	SDL_RenderPresent(renderer);
 }

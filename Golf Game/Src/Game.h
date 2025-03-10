@@ -10,6 +10,7 @@ class Game
 {
 private:
 	bool isRunning = false;
+	bool win = false;
 	
 	SDL_Window* window;
 public:
