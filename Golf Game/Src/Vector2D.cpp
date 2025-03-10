@@ -43,8 +43,11 @@ Vector2D& Vector2D::operator= (const Vector2D& vec)
 
 Vector2D& Vector2D::Zero()
 {
+	this->i = 0.0f;
+	this->j = 0.0f;
 	this->x = 0.0f;
 	this->y = 0.0f;
+	this->magnitude = 0.0f;
 	return *this;
 }
 
@@ -52,5 +55,10 @@ std::ostream& operator<< (std::ostream& stream, const Vector2D& vec)
 {
 	stream << "(" << vec.x << " , " << vec.y << ")";
 	return stream;
+}
+
+float Vector2D::getMagnitude(float x, float y)
+{
+	return sqrt(x * x + y * y);
 }
 

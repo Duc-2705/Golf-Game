@@ -7,16 +7,15 @@
 class Ball
 {
 private:
-	const int BALL_WIDTH = 30.0;
-	const int BALL_HEIGHT = 30.0;
+	const int BALL_WIDTH = 30;
+	const int BALL_HEIGHT = 30;
 
 	Vector2D position;
 	Vector2D velocity;
-	Vector2D acceleration;
 
 	const float dTime = 0.016f; //thoi gian 1 frame
-	const float FRICTION = -80.0f; //Ma sat, giam toc
-	const float REFLECT = -0.5f; // Phan xa va giam nang luong
+	const float FRICTION = -80.0f; //giam toc do ma sat
+	const float LOSS = 0.5f; // giam nang luong do va cham
 
 	SDL_Rect srcBall;
 	SDL_FRect destBall;
