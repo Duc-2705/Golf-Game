@@ -5,8 +5,6 @@
 #include <iostream>
 
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 640;
 
 class Game
 {
@@ -15,6 +13,9 @@ private:
 	
 	SDL_Window* window;
 public:
+	static const int WINDOW_WIDTH = 800;
+	static const int WINDOW_HEIGHT = 640;
+
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
 

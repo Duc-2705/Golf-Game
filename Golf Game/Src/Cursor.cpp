@@ -12,7 +12,7 @@ void Cursor::handleEvents()
 		break;
 	case SDL_MOUSEBUTTONUP:
 		SDL_GetMouseState(&xMouseUp, &yMouseUp);
-		checkPulling = true;
+		checkPulling = true; 
 		break;
 	default:
 		break;

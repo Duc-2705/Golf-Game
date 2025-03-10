@@ -7,10 +7,7 @@
 class Ball
 {
 private:
-	const int BALL_WIDTH = 30;
-	const int BALL_HEIGHT = 30;
 
-	Vector2D position;
 	Vector2D velocity;
 
 	const float dTime = 0.016f; //thoi gian 1 frame
@@ -25,6 +22,11 @@ private:
 	Cursor* cursor = nullptr;
 
 public:
+	Vector2D position;
+
+	static const int BALL_WIDTH = 30;
+	static const int BALL_HEIGHT = 30;
+
 	Ball();
 	~Ball();
 

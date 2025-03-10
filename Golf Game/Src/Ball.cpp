@@ -20,8 +20,8 @@ void Ball::init()
 
 	velocity.Zero();
 	
-	position.x = static_cast<float>(WINDOW_WIDTH/2 - BALL_WIDTH/2);
-	position.y = static_cast<float>(WINDOW_HEIGHT/2 -BALL_HEIGHT/2);
+	position.x = static_cast<float>(Game::WINDOW_WIDTH/2 - BALL_WIDTH/2);
+	position.y = static_cast<float>(Game::WINDOW_HEIGHT/2 -BALL_HEIGHT/2);
 
 	destBall.w = static_cast<float>(BALL_WIDTH);
 	destBall.h = static_cast<float>(BALL_HEIGHT);
@@ -37,11 +37,14 @@ void Ball::update()
 	if (cursor->isPulling())
 	{
 		velocity.magnitude = cursor->Force().magnitude; // Do lon cua Force
-		velocity.i = - (cursor->Force().x / cursor->Force().magnitude); // Vector don vi cua Force chieu len Ox
-		velocity.j = - (cursor->Force().y / cursor->Force().magnitude); // Vector don vi cua Force chieu len Oy
+
+		// Vector don vi cua Force chieu len Ox
+		velocity.i = (cursor->Force().magnitude) ? - (cursor->Force().x / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
+
+		// Vector don vi cua Force chieu len Oy
+		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 	}
 
-	std::cout << velocity.i << " " << velocity.j << " " << velocity.magnitude << std::endl;
 }
 
 void Ball::motion()
@@ -55,9 +58,9 @@ void Ball::motion()
 	position.x += velocity.i * velocity.magnitude * dTime;
 	position.y += velocity.j * velocity.magnitude * dTime;
 
-	if (position.x + destBall.w > WINDOW_WIDTH)
+	if (position.x + destBall.w > Game::WINDOW_WIDTH)
 	{
-		position.x = static_cast<float> ( WINDOW_WIDTH - destBall.w);
+		position.x = static_cast<float> ( Game::WINDOW_WIDTH - destBall.w);
 		velocity.i *= -1.0f; //Doi chieu do va cham
 		velocity.magnitude *= LOSS; //Giam nang luong do va cham
 	}
@@ -68,9 +71,9 @@ void Ball::motion()
 		velocity.magnitude *= LOSS;
 	}
 
-	if (position.y + destBall.h > WINDOW_HEIGHT)
+	if (position.y + destBall.h > Game::WINDOW_HEIGHT)
 	{
-		position.y = static_cast<float> (WINDOW_HEIGHT - destBall.h);
+		position.y = static_cast<float> (Game::WINDOW_HEIGHT - destBall.h);
 		velocity.j *= -1.0f;
 		velocity.magnitude *= LOSS;
 	}

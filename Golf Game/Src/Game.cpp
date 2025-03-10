@@ -1,11 +1,13 @@
 #include "Game.h"
 #include "TextureManager..h"
 #include "Ball.h"
+#include "Hole.h"
 
 Game::Game() {}
 Game::~Game() {}
 
 Ball* ball = new Ball();
+Hole* hole = new Hole();
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -21,13 +23,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0 ,255);
+			SDL_SetRenderDrawColor(renderer, 255, 224, 189 ,255);
 		}
 
 		isRunning = true;
 	}
 
 	ball->init();
+	hole->init();
 }
 
 void Game::handleEvents()
@@ -46,7 +49,18 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	hole->update();
+
 	ball->update();
+	std::cout << std::fabs(ball->position.x - hole->position.x) << " " <<
+				 std::fabs(ball->position.y - hole->position.y) << std::endl;
+	
+	if (std::fabs(ball->position.x - hole->position.x) <= 5  &&
+		std::fabs(ball->position.y - hole->position.y) <= 5)
+	{
+		isRunning = false;
+	}
+
 	ball->motion();
 }
 
@@ -54,6 +68,7 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 
+	hole->render();
 	ball->render();
 
 	SDL_RenderPresent(renderer);
@@ -62,6 +77,7 @@ void Game::render()
 void Game::clean()
 {
 	delete ball;
+	delete hole;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

@@ -7,6 +7,7 @@
     <ClCompile Include="Src\Ball.cpp" />
     <ClCompile Include="Src\Vector2D.cpp" />
     <ClCompile Include="Src\Cursor.cpp" />
+    <ClCompile Include="Src\Hole.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="Src\Ball.h" />
     <ClInclude Include="Src\Vector2D.h" />
     <ClInclude Include="Src\Cursor.h" />
+    <ClInclude Include="Src\Hole.h" />
   </ItemGroup>
 </Project>
