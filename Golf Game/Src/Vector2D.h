@@ -44,4 +44,10 @@ public:
 	friend std::ostream& operator<< (std::ostream& stream, const Vector2D& vec);
 
 	static float getMagnitude(float x, float y);
+
+	static float DotProductUnit(const Vector2D& v1, const Vector2D& v2);
+
+	static float DotProduct(const Vector2D& v1, const Vector2D& v2);
+
+	static float cosAngle(const Vector2D& v1, const Vector2D& v2);
 };

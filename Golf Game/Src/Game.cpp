@@ -2,12 +2,15 @@
 #include "TextureManager..h"
 #include "Ball.h"
 #include "Hole.h"
+#include "Obstacle.h"
+#include "Collision.h"
 
 Game::Game() {}
 Game::~Game() {}
 
-Ball* ball = new Ball();
-Hole* hole = new Hole(1,0,5);
+Hole* hole = new Hole (0,0,0);
+Obstacle* obstacle = new Obstacle();
+Ball* ball = new Ball(obstacle);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -29,8 +32,10 @@ void Game::init(const char* title, bool fullscreen)
 		isRunning = true;
 	}
 
+	obstacle->init();
 	ball->init();
 	hole->init();
+
 }
 
 void Game::handleEvents()
@@ -50,12 +55,11 @@ void Game::handleEvents()
 void Game::update()
 {
 	hole->update();
+	obstacle->update();
 
 	if (!win)
 	{
 		ball->update();
-		std::cout << std::fabs(ball->position.x - hole->position.x) << " " <<
-			std::fabs(ball->position.y - hole->position.y) << std::endl;
 	}
 	
 	if (!win &&
@@ -77,6 +81,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	hole->render();
+	obstacle->render();
 	if (!win) ball->render();
 
 	SDL_RenderPresent(renderer);
@@ -86,6 +91,7 @@ void Game::clean()
 {
 	delete ball;
 	delete hole;
+	delete obstacle;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

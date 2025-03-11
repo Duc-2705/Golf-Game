@@ -3,6 +3,7 @@
 #include "Cursor.h"
 #include "Game.h"
 #include "Vector2D.h"
+#include "Obstacle.h"
 
 class Ball
 {
@@ -20,13 +21,20 @@ private:
 
 	Cursor* cursor = nullptr;
 
+	Obstacle* obstacle;
+
+	bool isAbleToCollide = true;
+
 public:
 	Vector2D position;
+	Vector2D center;
+
+	float radius;
 
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	Ball();
+	Ball(Obstacle* obstacle);
 	~Ball();
 
 	void init();
