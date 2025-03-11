@@ -9,8 +9,8 @@ void Hole::init()
 	position.x = static_cast<float>(Game::WINDOW_WIDTH / 2 - Ball::BALL_HEIGHT / 2);
 	position.y = 100.0f;
 
-	velocity.i = 1;
-	velocity.j = 0;
+	velocity.i = iDirect;
+	velocity.j = jDirect;
 
 	destHole.w = Ball::BALL_WIDTH;
 	destHole.h = Ball::BALL_HEIGHT;

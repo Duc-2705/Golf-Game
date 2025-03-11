@@ -23,7 +23,7 @@ public:
 	Game();
 	~Game();
 
-	void init(const char* tilte, int width, int height, bool fullscreen);
+	void init(const char* tilte, bool fullscreen);
 
 	void handleEvents();
 

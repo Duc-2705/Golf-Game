@@ -7,12 +7,12 @@ Game::Game() {}
 Game::~Game() {}
 
 Ball* ball = new Ball();
-Hole* hole = new Hole(5.0f);
+Hole* hole = new Hole(1,0,5);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
 
-void Game::init(const char* title, int width, int height, bool fullscreen)
+void Game::init(const char* title, bool fullscreen)
 {
 	int flag = 0;
 	if (fullscreen) flag = SDL_WINDOW_FULLSCREEN;

@@ -7,7 +7,6 @@
 class Ball
 {
 private:
-
 	Vector2D velocity;
 
 	const float dTime = 0.016f; //thoi gian 1 frame
