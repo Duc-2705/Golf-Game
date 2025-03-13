@@ -56,21 +56,16 @@ void Ball::update()
 		// Vector don vi cua Force chieu len Oy
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 	}
-	
-	velocity.x = velocity.i * velocity.magnitude;
-	velocity.y = velocity.j * velocity.magnitude;
 
 	if (isAbleToCollide && Collision::checkCollision(*this, *obstacle)) // Giu nguyen tphan tiep tuyen, dao nguoc tphan phap tuyen
 	{
 		//Phan xa guong
-		float DotProduct = velocity.x * obstacle->normal.i + velocity.y * obstacle->normal.j; //Tich vo huong
-		velocity.x = velocity.x - 2 * DotProduct * obstacle->normal.i;
-		velocity.y = velocity.y - 2 * DotProduct * obstacle->normal.j;
+		float DotProduct = velocity.i * obstacle->normal.i + velocity.j * obstacle->normal.j; //Tich vo huong
+
+		velocity.i = velocity.i - 2 * DotProduct * obstacle->normal.i;
+		velocity.j = velocity.j - 2 * DotProduct * obstacle->normal.j;
 
 		velocity.magnitude *= LOSS; //Giam do lon do va cham
-
-		velocity.i = (velocity.magnitude) ? velocity.x / velocity.magnitude : 0;
-		velocity.j = (velocity.magnitude) ? velocity.y / velocity.magnitude : 0;
 
 		isAbleToCollide = false;
 		std::cout << "Collision" << std::endl;
