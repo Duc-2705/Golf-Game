@@ -74,6 +74,8 @@ void Game::update()
 	if (!win) ball->motion();
 	
 	hole->motion();
+
+	//Collision::checkProjection(*ball, *obstacle);
 }
 
 void Game::render()

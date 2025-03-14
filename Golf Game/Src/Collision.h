@@ -8,5 +8,7 @@ class Collision
 public:
 	static float distanceToLine(const Ball& ball, const Obstacle& obstacle);
 
+	static bool checkProjection(const Ball& ball, const Obstacle& obstacle);
+
 	static bool checkCollision(const Ball& ball, const Obstacle& obstacle);
 };

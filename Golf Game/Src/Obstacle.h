@@ -13,6 +13,9 @@ private:
 
 public:
 
+	float OBSTACLE_WIDTH;
+	float OBSTACLE_HEIGHT;
+
 	Vector2D position;
 	Vector2D normal; //Vector phap tuyen cua mpn co do dai = 1
 
