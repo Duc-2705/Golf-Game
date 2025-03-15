@@ -9,8 +9,10 @@ Game::Game() {}
 Game::~Game() {}
 
 Hole* hole = new Hole (0,0,0);
-Obstacle* obstacle = new Obstacle("Triangle");
-Ball* ball = new Ball(obstacle);
+
+Obstacle* obstacle1 = new Obstacle("Square");
+
+Ball* ball = new Ball(obstacle1);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -32,7 +34,7 @@ void Game::init(const char* title, bool fullscreen)
 		isRunning = true;
 	}
 
-	obstacle->init();
+	obstacle1->init();
 	ball->init();
 	hole->init();
 
@@ -55,7 +57,7 @@ void Game::handleEvents()
 void Game::update()
 {
 	hole->update();
-	obstacle->update();
+	obstacle1->update();
 
 	if (!win)
 	{
@@ -84,7 +86,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	hole->render();
-	obstacle->render();
+	obstacle1->render();
 	if (!win) ball->render();
 
 	SDL_RenderPresent(renderer);
@@ -94,7 +96,7 @@ void Game::clean()
 {
 	delete ball;
 	delete hole;
-	delete obstacle;
+	delete obstacle1;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

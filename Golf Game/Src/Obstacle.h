@@ -12,7 +12,7 @@ private:
 	SDL_Rect srcObstacle;
 	SDL_FRect destObstacle;
 
-	std::string tag; // Shape obstacle
+	std::string shape; // Shape obstacle
 
 public:
 	std::vector<std::pair<Vector2D, Vector2D>> planes; //Vector chua nhung mp cua obstacle

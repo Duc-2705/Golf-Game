@@ -70,7 +70,7 @@ void Ball::update()
 		velocity.magnitude *= LOSS; //Giam do lon do va cham
 
 		isAbleToCollide = false;
-		std::cout << "Collision " << index << std::endl;
+		std::cout << "Collision plane " << index << std::endl;
 
 	}
 	else if (!isAbleToCollide && Collision::checkCollision(*this, *obstacle) ==  -1)isAbleToCollide = true;
