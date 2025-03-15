@@ -8,6 +8,8 @@
     <ClCompile Include="Src\Vector2D.cpp" />
     <ClCompile Include="Src\Cursor.cpp" />
     <ClCompile Include="Src\Hole.cpp" />
+    <ClCompile Include="Src\Collision.cpp" />
+    <ClCompile Include="Src\Obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -16,5 +18,7 @@
     <ClInclude Include="Src\Vector2D.h" />
     <ClInclude Include="Src\Cursor.h" />
     <ClInclude Include="Src\Hole.h" />
+    <ClInclude Include="Src\Collision.h" />
+    <ClInclude Include="Src\Obstacle.h" />
   </ItemGroup>
 </Project>

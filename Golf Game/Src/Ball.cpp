@@ -57,23 +57,24 @@ void Ball::update()
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 	}
 
-	if (isAbleToCollide && Collision::checkCollision(*this, *obstacle)) // Giu nguyen tphan tiep tuyen, dao nguoc tphan phap tuyen
+	if (isAbleToCollide && Collision::checkCollision(*this, *obstacle) != -1) // Giu nguyen tphan tiep tuyen, dao nguoc tphan phap tuyen
 	{
-		//Phan xa guong
-		float DotProduct = velocity.i * obstacle->normal.i + velocity.j * obstacle->normal.j; //Tich vo huong
+		int index = Collision::checkCollision(*this, *obstacle); // Va cham voi mp index
 
-		velocity.i = velocity.i - 2 * DotProduct * obstacle->normal.i;
-		velocity.j = velocity.j - 2 * DotProduct * obstacle->normal.j;
+		//Phan xa guong
+		float DotProduct = velocity.i * obstacle->planes[index].first.i + velocity.j * obstacle->planes[index].first.j; //Tich vo huong
+
+		velocity.i = velocity.i - 2 * DotProduct * obstacle->planes[index].first.i;
+		velocity.j = velocity.j - 2 * DotProduct * obstacle->planes[index].first.j;
 
 		velocity.magnitude *= LOSS; //Giam do lon do va cham
 
 		isAbleToCollide = false;
-		std::cout << "Collision" << std::endl;
+		std::cout << "Collision " << index << std::endl;
 
 	}
-	else if (!isAbleToCollide && !Collision::checkCollision(*this, *obstacle))isAbleToCollide = true;
+	else if (!isAbleToCollide && Collision::checkCollision(*this, *obstacle) ==  -1)isAbleToCollide = true;
 
-	//std::cout << velocity.magnitude << std::endl;
 }
 
 void Ball::motion()

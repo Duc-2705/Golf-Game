@@ -1,10 +1,11 @@
 #include "Game.h"
+#include <crtdbg.h> //thu vien check memory leak
 
 Game* game = nullptr;
 
 int main(int argc, char* argv[])
 {
-	const int FPS = 60.0f;
+	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 
 	Uint32 frameStart;
@@ -33,6 +34,8 @@ int main(int argc, char* argv[])
 	game->clean();
 
 	delete game;
+
+	_CrtDumpMemoryLeaks(); // Memory leak check
 
 	return 0;
 }

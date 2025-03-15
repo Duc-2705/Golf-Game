@@ -10,11 +10,11 @@ public:
 	float x, y;
 	float magnitude; // Do lon vector
 
-	Vector2D() 
+	Vector2D()
 	{
 		i = 0.0f;
 		j = 0.0f;
-		x = 0.0f; 
+		x = 0.0f;
 		y = 0.0f;
 		magnitude = 0.0f;
 	}

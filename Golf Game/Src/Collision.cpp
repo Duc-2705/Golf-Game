@@ -1,35 +1,29 @@
 #include "Collision.h"
 
-float Collision::distanceToLine(const Ball& ball, const Obstacle& obstacle) 
+float Collision::distanceToLine(const Ball& ball, const std::pair<Vector2D, Vector2D>& plane)
 {
-	//Khoang cach tu tam ball den duong thang mp obstacle
-	return (obstacle.normal.i * (ball.center.x - obstacle.position.x) +
-		obstacle.normal.j * (ball.center.y - obstacle.position.y));
+	return (plane.first.i * (ball.center.x - plane.second.x) +
+		plane.first.j * (ball.center.y - plane.second.y));
 }
 
-bool Collision::checkProjection(const Ball& ball, const Obstacle& obstacle)
+bool Collision::checkProjection(const Ball& ball, const Obstacle& obstacle, const std::pair<Vector2D, Vector2D>& plane)
 {
-	float distance = Collision::distanceToLine(ball, obstacle);
+	float distance = Collision::distanceToLine(ball, plane);
 
-	float xProj = ball.center.x - obstacle.normal.i * distance;
-	float yProj = ball.center.y - obstacle.normal.j * distance;
+	float xProj = ball.center.x - plane.first.i * distance;
+	float yProj = ball.center.y - plane.second.j * distance;
 
-	return (xProj >= obstacle.position.x && xProj <= obstacle.position.x + obstacle.OBSTACLE_WIDTH &&
-		yProj >= obstacle.position.y && yProj <= obstacle.position.y + obstacle.OBSTACLE_HEIGHT);
-
-	// Neu tam qua bong nam ngoai nhung 1 phan cua no van cham voi obstacle
-	
-	/*float mag = sqrt((xProj - ball.center.x) * (xProj - ball.center.x) + (yProj - ball.center.y) * (yProj - ball.center.y));
-
-	float xMinProj = ball.center.x + ball.radius * (xProj - ball.center.x) / mag;
-	float yMinProj = ball.center.y + ball.radius * (yProj - ball.center.y) / mag;
-
-	return (xMinProj >= obstacle.position.x && xMinProj <= obstacle.position.x + obstacle.OBSTACLE_WIDTH &&
-		yMinProj >= obstacle.position.y && yMinProj <= obstacle.position.y + obstacle.OBSTACLE_HEIGHT);*/
+	return (
+		(plane.first.j == 0 || xProj >= plane.second.x && xProj <= plane.second.x + obstacle.OBSTACLE_WIDTH) &&
+		(plane.first.i == 0 || yProj >= plane.second.y && yProj <= plane.second.y + obstacle.OBSTACLE_HEIGHT));
 }
 
-bool Collision::checkCollision(const Ball& ball, const Obstacle& obstacle)
+int Collision::checkCollision(const Ball& ball, const Obstacle& obstacle)
 {
-	//So sanh khoang cach tu tam ball den duong thang mp obstacle voi ban kinh ball
-	return checkProjection (ball, obstacle) && fabs(Collision::distanceToLine(ball, obstacle)) <= ball.radius;
+	for (int i = 0; i < (int) obstacle.planes.size(); i ++)
+	{
+
+		if (checkProjection(ball,obstacle, obstacle.planes[i]) && std::fabs(distanceToLine(ball, obstacle.planes[i])) <= ball.radius) return i;
+	}
+	return -1;
 }

@@ -9,7 +9,7 @@ Game::Game() {}
 Game::~Game() {}
 
 Hole* hole = new Hole (0,0,0);
-Obstacle* obstacle = new Obstacle();
+Obstacle* obstacle = new Obstacle("Triangle");
 Ball* ball = new Ball(obstacle);
 
 SDL_Event Game::event;
@@ -67,6 +67,7 @@ void Game::update()
 		std::fabs(ball->position.y - hole->position.y) <= 5)
 	{
 		win = true;
+		delete ball;
 		ball = nullptr;
 		std::cout << "Congratulation!!" << std::endl;
 	}
