@@ -3,10 +3,6 @@
 #include "Game.h"
 #include "Collision.h"
 
-Ball::Ball(Obstacle* obstacle)
-{
-	this->obstacle = obstacle;
-}
 
 Ball::~Ball()
 {
@@ -34,6 +30,11 @@ void Ball::init()
 
 	center.x = position.x + radius;
 	center.y = position.y + radius;
+
+	for (int i = 0; i < obstacles.size(); i++)
+	{
+		isAbleToCollide.push_back(1);
+	}
 }
 
 void Ball::update()
@@ -57,23 +58,26 @@ void Ball::update()
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 	}
 
-	if (isAbleToCollide && Collision::checkCollision(*this, *obstacle) != -1) // Giu nguyen tphan tiep tuyen, dao nguoc tphan phap tuyen
+	for (int i = 0; i < obstacles.size(); i++)
 	{
-		int index = Collision::checkCollision(*this, *obstacle); // Va cham voi mp index
+		if (isAbleToCollide[i] && Collision::checkCollision(*this, *obstacles[i]) != -1) // Va cham voi obstacle i
+			{
+				Obstacle* obstacle = obstacles[i];
+				int index = Collision::checkCollision(*this, *obstacle); // Va cham voi mp index
 
-		//Phan xa guong
-		float DotProduct = velocity.i * obstacle->planes[index].first.i + velocity.j * obstacle->planes[index].first.j; //Tich vo huong
+				//Phan xa guong
+				float DotProduct = velocity.i * obstacle->planes[index].first.i + velocity.j * obstacle->planes[index].first.j; //Tich vo huong
 
-		velocity.i = velocity.i - 2 * DotProduct * obstacle->planes[index].first.i;
-		velocity.j = velocity.j - 2 * DotProduct * obstacle->planes[index].first.j;
+				velocity.i = velocity.i - 2 * DotProduct * obstacle->planes[index].first.i;
+				velocity.j = velocity.j - 2 * DotProduct * obstacle->planes[index].first.j;
 
-		velocity.magnitude *= LOSS; //Giam do lon do va cham
+				velocity.magnitude *= LOSS; //Giam do lon do va cham
 
-		isAbleToCollide = false;
-		std::cout << "Collision plane " << index << std::endl;
-
+				isAbleToCollide[i] = false;
+				std::cout << "Collision plane " << index << std::endl;
+			}
+		else if (!isAbleToCollide[i] && Collision::checkCollision(*this, *obstacles[i]) == -1) isAbleToCollide[i] = true;
 	}
-	else if (!isAbleToCollide && Collision::checkCollision(*this, *obstacle) ==  -1)isAbleToCollide = true;
 
 }
 

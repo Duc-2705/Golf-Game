@@ -24,7 +24,7 @@ public:
 	Vector2D PointOnPlane; //Diem thuoc mp
 	Vector2D normal; //Vector phap tuyen cua mpn co do dai = 1
 
-	Obstacle(const std::string tag);
+	Obstacle(const std::string tag, int x, int y, int w, int h);
 	~Obstacle();
 
 	void init();

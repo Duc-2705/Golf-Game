@@ -19,6 +19,7 @@ private:
 public:
 	Vector2D position;
 
+	
 	Hole(float iDirect, float jDirect, float speed) : iDirect(iDirect), jDirect(jDirect), speed(speed) {};
 	~Hole() { SDL_DestroyTexture(texHole); };
 

@@ -1,9 +1,14 @@
 #include "Obstacle.h"
 #include "Game.h"
 
-Obstacle::Obstacle(const std::string shape)
+Obstacle::Obstacle(const std::string shape, int x, int y, int w, int h)
 {
 	this->shape = shape;
+	position.x = x;
+	position.y = y;
+
+	OBSTACLE_WIDTH = w;
+	OBSTACLE_HEIGHT = h;
 }
 
 Obstacle::~Obstacle()
@@ -14,14 +19,8 @@ Obstacle::~Obstacle()
 void Obstacle::init()
 {
 
-	OBSTACLE_WIDTH = 400.0f;
-	OBSTACLE_HEIGHT = 200.0f;
-
 	destObstacle.w = OBSTACLE_WIDTH;
 	destObstacle.h = OBSTACLE_HEIGHT;
-
-	position.x = 300.0f;
-	position.y = 400.0f;
 
 	if (shape == "Triangle")
 	{
@@ -54,9 +53,9 @@ void Obstacle::init()
 		planes.push_back({ normal, PointOnPlane });
 	}
 	
-	else if (shape == "Square")
+	else if (shape == "Rectangle")
 	{
-		texObstacle = TextureManager::LoadTexture("assets/SquareObstacle.png");
+		texObstacle = TextureManager::LoadTexture("assets/RectangleObstacle.png");
 
 		TextureManager::setSrcRect(texObstacle, srcObstacle);
 

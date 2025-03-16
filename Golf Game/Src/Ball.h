@@ -21,9 +21,13 @@ private:
 
 	Cursor* cursor = nullptr;
 
-	Obstacle* obstacle;
+	//Obstacle* obstacle;
 
-	bool isAbleToCollide = true;
+	std::vector<Obstacle*> obstacles;
+
+	//bool isAbleToCollide = true;
+
+	std::vector<bool> isAbleToCollide;
 
 public:
 	Vector2D position;
@@ -34,7 +38,7 @@ public:
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	Ball(Obstacle* obstacle);
+	template<typename ...mObstacles> Ball(mObstacles... mObstacle) : obstacles{ mObstacle ... } {}
 	~Ball();
 
 	void init();
