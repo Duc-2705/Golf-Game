@@ -5,6 +5,8 @@
 #include "Vector2D.h"
 #include "Obstacle.h"
 
+class Cursor;
+
 class Ball
 {
 private:
@@ -19,13 +21,9 @@ private:
 
 	SDL_Texture* texBall = nullptr;
 
-	Cursor* cursor = nullptr;
-
-	//Obstacle* obstacle;
+	Cursor* cursor;
 
 	std::vector<Obstacle*> obstacles;
-
-	//bool isAbleToCollide = true;
 
 	std::vector<bool> isAbleToCollide;
 

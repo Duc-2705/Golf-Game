@@ -1,11 +1,11 @@
 #include "Ball.h"
 #include "TextureManager..h"
-#include "Game.h"
 #include "Collision.h"
 
 
 Ball::~Ball()
 {
+	cursor->clean();
 	delete cursor;
 	SDL_DestroyTexture(texBall);
 }
@@ -16,7 +16,7 @@ void Ball::init()
 
 	TextureManager::setSrcRect(texBall, srcBall);
 
-	cursor = new Cursor();
+	cursor = new Cursor(this);
 
 	velocity.Zero();
 	
@@ -79,6 +79,7 @@ void Ball::update()
 		else if (!isAbleToCollide[i] && Collision::checkCollision(*this, *obstacles[i]) == -1) isAbleToCollide[i] = true;
 	}
 
+
 }
 
 void Ball::motion()
@@ -122,6 +123,7 @@ void Ball::motion()
 
 void Ball::render()
 {
+	cursor->update();
 	TextureManager::Draw(texBall, srcBall, destBall);
 }
 

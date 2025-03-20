@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Arrow.cpp" />
     <ClCompile Include="Src\Ball.cpp" />
     <ClCompile Include="Src\Collision.cpp" />
     <ClCompile Include="Src\Cursor.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Arrow.h" />
     <ClInclude Include="Src\Ball.h" />
     <ClInclude Include="Src\Collision.h" />
     <ClInclude Include="Src\Game.h" />
