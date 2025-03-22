@@ -8,11 +8,11 @@
 Game::Game() {}
 Game::~Game() {}
 
-Hole* hole = new Hole (0,0,0);
+Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
 
-Obstacle* obstacle1 = new Obstacle("Rectangle", 400, 200, 200, 100);
-Obstacle* obstacle2 = new Obstacle("Triangle", 400, 100, 300, 100);
-Obstacle* obstacle3 = new Obstacle("Triangle", 50, 500, 100, 100);
+Obstacle* obstacle1 = new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f);
+Obstacle* obstacle2 = new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f);
+Obstacle* obstacle3 = new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f);
 
 Ball* ball = new Ball(obstacle1, obstacle2, obstacle3);
 
@@ -71,8 +71,8 @@ void Game::update()
 	}
 	
 	if (!win &&
-		std::fabs(ball->position.x - hole->position.x) <= 5  &&
-		std::fabs(ball->position.y - hole->position.y) <= 5)
+		std::fabs(ball->position.x - hole->position.x) <= 5.0f  &&
+		std::fabs(ball->position.y - hole->position.y) <= 5.0f)
 	{
 		win = true;
 		delete ball;
@@ -84,7 +84,7 @@ void Game::update()
 	
 	hole->motion();
 
-	//Collision::checkProjection(*ball, *obstacle);
+	//std::cout << fabs(Collision::distanceToLine(*ball, obstacle1->planes[0])) << std::endl;
 }
 
 void Game::render()

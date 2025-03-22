@@ -66,15 +66,16 @@ void Ball::update()
 				int index = Collision::checkCollision(*this, *obstacle); // Va cham voi mp index
 
 				//Phan xa guong
-				float DotProduct = velocity.i * obstacle->planes[index].first.i + velocity.j * obstacle->planes[index].first.j; //Tich vo huong
+				float DotProduct = velocity.i * obstacle->normal.i + velocity.j * obstacle->normal.j; //Tich vo huong velocity va normal
 
-				velocity.i = velocity.i - 2 * DotProduct * obstacle->planes[index].first.i;
-				velocity.j = velocity.j - 2 * DotProduct * obstacle->planes[index].first.j;
+				velocity.i = velocity.i - 2 * DotProduct * obstacle->normal.i;
+				velocity.j = velocity.j - 2 * DotProduct * obstacle->normal.j;
 
 				velocity.magnitude *= LOSS; //Giam do lon do va cham
 
 				isAbleToCollide[i] = false;
-				std::cout << "Collision plane " << index << std::endl;
+
+				std::cout << obstacle->normal.i << " " << obstacle->normal.j << " Collision plane " << index << std::endl;
 			}
 		else if (!isAbleToCollide[i] && Collision::checkCollision(*this, *obstacles[i]) == -1) isAbleToCollide[i] = true;
 	}

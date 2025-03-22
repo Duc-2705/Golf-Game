@@ -26,7 +26,12 @@ public:
 		magnitude = Vector2D::getMagnitude(this->x, this->y);
 	}
 
-	Vector2D(float x, float y) : x(x), y(y) {};
+	Vector2D(float x, float y)
+	{
+		this->x = x;
+		this->y = y;
+		magnitude = Vector2D::getMagnitude(x, y);
+	}
 
 	friend Vector2D operator+ (const Vector2D& v1, const Vector2D& v2);
 	friend Vector2D operator- (const Vector2D& v1, const Vector2D& v2);
@@ -50,4 +55,6 @@ public:
 	static float DotProduct(const Vector2D& v1, const Vector2D& v2);
 
 	static float cosAngle(const Vector2D& v1, const Vector2D& v2);
+
+	void normalize(float x, float y);
 };
