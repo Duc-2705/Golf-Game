@@ -75,3 +75,9 @@ float Vector2D::cosAngle(const Vector2D& v1, const Vector2D& v2)
 {
 	return Vector2D::DotProductUnit(v1, v2) / (Vector2D::getMagnitude(v1.i, v1.j) * Vector2D::getMagnitude(v2.i, v2.j));
 }
+
+void Vector2D::normalize(float x, float y)
+{
+	this->i = x / sqrt(x * x + y * y);
+	this->j = y / sqrt(x * x + y * y);
+}

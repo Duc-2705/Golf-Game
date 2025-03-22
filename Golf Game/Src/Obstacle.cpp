@@ -1,7 +1,7 @@
 #include "Obstacle.h"
 #include "Game.h"
 
-Obstacle::Obstacle(const std::string shape, int x, int y, int w, int h)
+Obstacle::Obstacle(const std::string shape, float x, float y, float w, float h)
 {
 	this->shape = shape;
 	position.x = x;
@@ -22,35 +22,25 @@ void Obstacle::init()
 	destObstacle.w = OBSTACLE_WIDTH;
 	destObstacle.h = OBSTACLE_HEIGHT;
 
+	normal.Zero();
+
 	if (shape == "Triangle")
 	{
 		texObstacle = TextureManager::LoadTexture("assets/TriangleObstacle.png");
 
 		TextureManager::setSrcRect(texObstacle, srcObstacle);
 
-		normal.i = -destObstacle.h / Vector2D::getMagnitude(destObstacle.w, destObstacle.h); //Vector don vi cua normal chieu len Ox
-		normal.j = destObstacle.w / Vector2D::getMagnitude(destObstacle.w, destObstacle.h); //Vector don vi cua normal chieu len Oy
+		//Canh huyen
+		planes.push_back({ Vector2D{position.x, position.y},
+						Vector2D{position.x + OBSTACLE_WIDTH, position.y + OBSTACLE_HEIGHT} });
 
-		PointOnPlane.x = position.x;
-		PointOnPlane.y = position.y;
+		//Canh goc vuong trai
+		planes.push_back({ Vector2D{position.x + OBSTACLE_WIDTH, position.y + OBSTACLE_HEIGHT},
+						Vector2D{position.x + OBSTACLE_WIDTH, position.y} });
 
-		planes.push_back({ normal, PointOnPlane });
-
-		normal.i = 1;
-		normal.j = 0;
-
-		PointOnPlane.x = position.x + OBSTACLE_WIDTH;
-		PointOnPlane.y = position.y;
-
-		planes.push_back({ normal, PointOnPlane });
-
-		normal.i = 0;
-		normal.j = 1;
-
-		PointOnPlane.x = position.x;
-		PointOnPlane.y = position.y;
-
-		planes.push_back({ normal, PointOnPlane });
+		//Canh goc vuong tren
+		planes.push_back({ Vector2D{position.x + OBSTACLE_WIDTH, position.y},
+						Vector2D{position.x, position.y} });
 	}
 	
 	else if (shape == "Rectangle")
@@ -59,37 +49,21 @@ void Obstacle::init()
 
 		TextureManager::setSrcRect(texObstacle, srcObstacle);
 
-		normal.i = 0;
-		normal.j = 1;
+		//Canh tren
+		planes.push_back({ Vector2D{position.x, position.y},
+						Vector2D{position.x + OBSTACLE_WIDTH, position.y} });
 
-		PointOnPlane.x = position.x;
-		PointOnPlane.y = position.y;
+		//Canh phai
+		planes.push_back({ Vector2D{position.x + OBSTACLE_WIDTH, position.y},
+						Vector2D{position.x + OBSTACLE_WIDTH, position.y + OBSTACLE_HEIGHT} });
 
-		planes.push_back({ normal, PointOnPlane });
+		//Canh duoi
+		planes.push_back({ Vector2D{position.x + OBSTACLE_WIDTH, position.y + OBSTACLE_HEIGHT},
+						Vector2D{position.x, position.y + OBSTACLE_HEIGHT} });
 
-		normal.i = 1;
-		normal.j = 0;
-
-		PointOnPlane.x = position.x + OBSTACLE_WIDTH;
-		PointOnPlane.y = position.y;
-
-		planes.push_back({ normal, PointOnPlane });
-
-		normal.i = 0;
-		normal.j = 1;
-
-		PointOnPlane.x = position.x;
-		PointOnPlane.y = position.y + OBSTACLE_HEIGHT;
-
-		planes.push_back({ normal, PointOnPlane });
-
-		normal.i = 1;
-		normal.j = 0;
-
-		PointOnPlane.x = position.x;
-		PointOnPlane.y = position.y;
-
-		planes.push_back({ normal, PointOnPlane });
+		//Canh trai
+		planes.push_back({ Vector2D{position.x, position.y + OBSTACLE_HEIGHT},
+						Vector2D{position.x, position.y} });
 	}
 }
 
