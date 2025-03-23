@@ -80,7 +80,7 @@ void Ball::update()
 		else if (!isAbleToCollide[i] && Collision::checkCollision(*this, *obstacles[i]) == -1) isAbleToCollide[i] = true;
 	}
 
-
+	this->motion();
 }
 
 void Ball::motion()

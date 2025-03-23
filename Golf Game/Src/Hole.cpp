@@ -20,6 +20,8 @@ void Hole::update()
 {
 	destHole.x = position.x;
 	destHole.y = position.y;
+
+	this->motion();
 }
 
 void Hole::motion()

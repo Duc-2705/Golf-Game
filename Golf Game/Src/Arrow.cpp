@@ -38,7 +38,7 @@ void Arrow::setAngle(double angle)
 
 void Arrow::setRange(float mag)
 {
-	destArrow.w = static_cast<float>(mag) * SCALE;
+	destArrow.w = mag * SCALE;
 	if (destArrow.w > 50.0f) destArrow.w = 50.0f;
 }
 

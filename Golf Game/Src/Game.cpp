@@ -4,9 +4,12 @@
 #include "Hole.h"
 #include "Obstacle.h"
 #include "Collision.h"
+#include "Map.h"
 
 Game::Game() {}
 Game::~Game() {}
+
+Map* map = new Map();
 
 Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
 
@@ -36,10 +39,14 @@ void Game::init(const char* title, bool fullscreen)
 		isRunning = true;
 	}
 
+	map->LoadMap("assets/TileMap1.txt", 25, 20);
+
 	obstacle1->init();
 	obstacle2->init();
 	obstacle3->init();
+
 	ball->init();
+
 	hole->init();
 
 }
@@ -79,22 +86,24 @@ void Game::update()
 		ball = nullptr;
 		std::cout << "Congratulation!!" << std::endl;
 	}
-
-	if (!win) ball->motion();
 	
-	hole->motion();
-
-	//std::cout << fabs(Collision::distanceToLine(*ball, obstacle1->planes[0])) << std::endl;
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
+	
+	for (auto& tile : map->tiles)
+	{
+		tile->render();
+	}
 
 	hole->render();
+
 	obstacle1->render();
 	obstacle2->render();
 	obstacle3->render();
+
 	if (!win) ball->render();
 
 	SDL_RenderPresent(renderer);
@@ -102,6 +111,7 @@ void Game::render()
 
 void Game::clean()
 {
+	delete map;
 	delete ball;
 	delete hole;
 	delete obstacle1;

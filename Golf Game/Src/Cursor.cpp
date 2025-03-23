@@ -36,10 +36,10 @@ void Cursor::update()
 	if (MouseDown)
 	{
 		SDL_GetMouseState(&xMouseState, &yMouseState);
-		arrow->setAngle(SDL_atan2(yMouseState - yMouseDown, xMouseState - xMouseDown) * 180/ M_PI + 180); //Goc quay
+		arrow->setAngle(atan2(yMouseState - yMouseDown, xMouseState - xMouseDown) * 180/ M_PI + 180); //Goc quay
 		arrow->update();
 
-		float mag = sqrt((xMouseState - xMouseDown) * (xMouseState - xMouseDown) + (yMouseState - yMouseDown) * (yMouseState - yMouseDown));
+		float mag = static_cast<float>(sqrt((xMouseState - xMouseDown) * (xMouseState - xMouseDown) + (yMouseState - yMouseDown) * (yMouseState - yMouseDown)));
 
 		arrow->setRange(mag); //Do lon mui ten
 
