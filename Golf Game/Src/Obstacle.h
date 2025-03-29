@@ -34,15 +34,11 @@ private:
 
 public:
 	std::vector<Plane> planes; //Vector chua nhung mp cua obstacle 
-														//voi first la vector normal, second là position diem thuoc mp
 
 	float OBSTACLE_WIDTH;
 	float OBSTACLE_HEIGHT;
 
 	Vector2D position;
-
-	Vector2D endPoint1; //Diem thuoc mp
-	Vector2D endPoint2;
 
 	Vector2D normal; //Vector phap tuyen cua mpn co do dai = 1
 

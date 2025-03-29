@@ -11,7 +11,7 @@ bool Collision::checkProjection(const Ball& ball, const Obstacle& obstacle, cons
 	float distance = Collision::distanceToLine(ball, plane);
 
 	float xProj = ball.center.x - plane.normal.i * distance;
-	float yProj = ball.center.y - plane.endPoint1.j * distance;
+	float yProj = ball.center.y - plane.normal.j * distance;
 
 	return (
 		(plane.normal.j == 0 || xProj >= std::min(plane.endPoint1.x, plane.endPoint2.x) && xProj <= std::max(plane.endPoint1.x, plane.endPoint2.x)) &&
