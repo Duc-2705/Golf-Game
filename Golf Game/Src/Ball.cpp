@@ -56,6 +56,9 @@ void Ball::update()
 
 		// Vector don vi cua Force chieu len Oy
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
+
+		//Mix_PlayChannel(-1, Game::chunkHit, 0);
+		playChunk(Game::chunkHit, velocity.magnitude);
 	}
 
 	for (int i = 0; i < obstacles.size(); i++)
@@ -74,6 +77,8 @@ void Ball::update()
 				velocity.magnitude *= LOSS; //Giam do lon do va cham
 
 				isAbleToCollide[i] = false;
+
+				playChunk(Game::chunkCollide, velocity.magnitude);
 
 				std::cout << obstacle->normal.i << " " << obstacle->normal.j << " Collision plane " << index << std::endl;
 			}
@@ -99,12 +104,16 @@ void Ball::motion()
 		position.x = static_cast<float> ( Game::WINDOW_WIDTH - destBall.w);
 		velocity.i *= -1.0f; //Doi chieu do va cham
 		velocity.magnitude *= LOSS; //Giam nang luong do va cham
+
+		playChunk(Game::chunkCollide, velocity.magnitude);
 	}
 	else if (position.x < 0)
 	{
 		position.x = 0.0f;
 		velocity.i *= -1.0f;
 		velocity.magnitude *= LOSS;
+
+		playChunk(Game::chunkCollide, velocity.magnitude);
 	}
 
 	if (position.y + destBall.h > Game::WINDOW_HEIGHT)
@@ -112,14 +121,17 @@ void Ball::motion()
 		position.y = static_cast<float> (Game::WINDOW_HEIGHT - destBall.h);
 		velocity.j *= -1.0f;
 		velocity.magnitude *= LOSS;
+
+		playChunk(Game::chunkCollide, velocity.magnitude);
 	}
 	else if (position.y < 0)
 	{
 		position.y = 0.0f;
 		velocity.j *= -1.0f;
 		velocity.magnitude *= LOSS;
-	}	
 
+		playChunk(Game::chunkCollide, velocity.magnitude);
+	}	
 }
 
 void Ball::render()
@@ -128,3 +140,8 @@ void Ball::render()
 	TextureManager::Draw(texBall, srcBall, destBall);
 }
 
+void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag)
+{
+	Mix_VolumeChunk(chunk, static_cast<int>(veloMag / MAX_VELOCITY * MAX_VOLUME));
+	Mix_PlayChannel(-1, chunk, 0);
+}

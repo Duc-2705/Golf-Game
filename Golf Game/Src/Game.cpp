@@ -21,6 +21,9 @@ Ball* ball = new Ball(obstacle1, obstacle2, obstacle3);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
+Mix_Chunk* Game::chunkHit = nullptr;
+Mix_Chunk* Game::chunkDrop = nullptr;
+Mix_Chunk* Game::chunkCollide = nullptr;
 
 void Game::init(const char* title, bool fullscreen)
 {
@@ -38,6 +41,15 @@ void Game::init(const char* title, bool fullscreen)
 
 		isRunning = true;
 	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		std::cout << "SDL2_mixer could not initialize!: " << Mix_GetError() << std::endl;
+	}
+
+	chunkHit = Mix_LoadWAV("sound/Hit.wav");
+	chunkDrop = Mix_LoadWAV("sound/hole_drop.wav");
+	chunkCollide = Mix_LoadWAV("sound/bass.wav");
 
 	map->LoadMap("assets/TileMap1.txt", 25, 20);
 
@@ -81,6 +93,8 @@ void Game::update()
 		std::fabs(ball->position.x - hole->position.x) <= 5.0f  &&
 		std::fabs(ball->position.y - hole->position.y) <= 5.0f)
 	{
+		Mix_PlayChannel(-1, chunkDrop, 0);
+
 		win = true;
 		delete ball;
 		ball = nullptr;
@@ -117,7 +131,14 @@ void Game::clean()
 	delete obstacle1;
 	delete obstacle2;
 	delete obstacle3;
-	SDL_DestroyWindow(window);
+
+	Mix_FreeChunk(chunkHit);
+	Mix_FreeChunk(chunkDrop);
+	Mix_FreeChunk(chunkCollide);
+
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+
+	Mix_Quit();
 	SDL_Quit();
 }

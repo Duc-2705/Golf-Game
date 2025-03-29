@@ -15,6 +15,9 @@ private:
 	const float dTime = 0.016f; //thoi gian 1 frame
 	const float FRICTION = -80.0f; //giam toc do ma sat
 	const float LOSS = 0.5f; // giam nang luong do va cham
+	
+	const int MAX_VELOCITY = 150;
+	const int MAX_VOLUME = 128;
 
 	SDL_Rect srcBall;
 	SDL_FRect destBall;
@@ -26,6 +29,10 @@ private:
 	std::vector<Obstacle*> obstacles;
 
 	std::vector<bool> isAbleToCollide;
+
+	void playChunk(Mix_Chunk* chunk,const float& veloMag);
+
+	void motion();
 
 public:
 	Vector2D position;
@@ -42,8 +49,6 @@ public:
 	void init();
 
 	void update();
-
-	void motion();
 
 	void render();
 };

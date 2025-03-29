@@ -16,6 +16,9 @@ private:
 
 	SDL_Rect srcHole;
 	SDL_FRect destHole;
+
+	void motion();
+
 public:
 	Vector2D position;
 
@@ -26,8 +29,6 @@ public:
 	void init();
 
 	void update();
-
-	void motion();
 
 	void render();
 };
