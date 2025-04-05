@@ -12,25 +12,24 @@ class Cursor
 private:
 	int xMouseDown, yMouseDown;
 	int xMouseUp, yMouseUp;
-	
 	int xMouseState, yMouseState;
 
 	Arrow* arrow;
+	Ball* ball;
 
 	bool checkPulling = false;
-	bool MouseDown = false;
+
+	void updateCamera();
 
 public:
+	bool MouseDown = false;
+
 	Cursor(Ball* ball);
 	~Cursor();
 
 	void handleEvents();
-
 	void update();
-
-	bool isPulling() { return checkPulling; }
+	bool Pulled() { return checkPulling; }
 
 	Vector2D Force();
-
-	void clean();
 };

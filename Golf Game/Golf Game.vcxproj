@@ -30,6 +30,7 @@
     <ClCompile Include="Src\Obstacle.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
     <ClCompile Include="Src\Tile.cpp" />
+    <ClCompile Include="Src\Utilities.cpp" />
     <ClCompile Include="Src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +44,7 @@
     <ClInclude Include="Src\Obstacle.h" />
     <ClInclude Include="Src\TextureManager..h" />
     <ClInclude Include="Src\Tile.h" />
+    <ClInclude Include="Src\Utilities.h" />
     <ClInclude Include="Src\Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

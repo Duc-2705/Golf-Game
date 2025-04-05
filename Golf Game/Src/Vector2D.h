@@ -24,6 +24,8 @@ public:
 		this->x = static_cast<float>(x);
 		this->y = static_cast<float>(y);
 		magnitude = Vector2D::getMagnitude(this->x, this->y);
+		this->i = (magnitude == 0) ? 0 : this->x / magnitude;
+		this->j = (magnitude == 0) ? 0 : this->y / magnitude;
 	}
 
 	Vector2D(float x, float y)
@@ -31,6 +33,8 @@ public:
 		this->x = x;
 		this->y = y;
 		magnitude = Vector2D::getMagnitude(x, y);
+		this->i = (magnitude == 0) ? 0 : this->x / magnitude;
+		this->j = (magnitude == 0) ? 0 : this->y / magnitude;
 	}
 
 	friend Vector2D operator+ (const Vector2D& v1, const Vector2D& v2);

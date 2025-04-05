@@ -10,14 +10,14 @@ class Cursor;
 class Ball
 {
 private:
-	Vector2D velocity;
-
 	const float dTime = 0.016f; //thoi gian 1 frame
 	const float FRICTION = -80.0f; //giam toc do ma sat
 	const float LOSS = 0.5f; // giam nang luong do va cham
 	
 	const int MAX_VELOCITY = 150;
 	const int MAX_VOLUME = 128;
+
+	const float LERP_SPEED = 0.1f;
 
 	SDL_Rect srcBall;
 	SDL_FRect destBall;
@@ -31,11 +31,13 @@ private:
 	std::vector<bool> isAbleToCollide;
 
 	void playChunk(Mix_Chunk* chunk,const float& veloMag);
-
 	void motion();
+	void collisionHandling();
+	void updateCamera();
 
 public:
 	Vector2D position;
+	Vector2D velocity;
 	Vector2D center;
 
 	float radius;
@@ -43,12 +45,10 @@ public:
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	template<typename ...mObstacles> Ball(mObstacles... mObstacle) : obstacles{ mObstacle ... } {}
+	Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles);
 	~Ball();
 
 	void init();
-
 	void update();
-
 	void render();
 };

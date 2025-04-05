@@ -1,4 +1,5 @@
 #include "Hole.h"
+#include "Map.h"
 
 void Hole::init()
 {
@@ -6,7 +7,7 @@ void Hole::init()
 
 	TextureManager::setSrcRect(texHole, srcHole);
 
-	position.x = static_cast<float>(Game::WINDOW_WIDTH / 2 - Ball::BALL_HEIGHT / 2);
+	position.x = static_cast<float>(Map::MAP_WIDTH / 2 - Ball::BALL_HEIGHT / 2);
 	position.y = 100.0f;
 
 	velocity.i = iDirect;
