@@ -42,12 +42,10 @@ public:
 
 	Vector2D normal; //Vector phap tuyen cua mpn co do dai = 1
 
-	Obstacle(const std::string shape , float x, float y, float w, float h);
+	Obstacle(const std::string& shape ,const float& x, const float& y, const float& w, const float& h);
 	~Obstacle();
 
 	void init();
-
 	void update();
-
 	void render();
 };

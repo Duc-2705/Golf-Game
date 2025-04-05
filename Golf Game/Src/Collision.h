@@ -9,7 +9,11 @@ class Collision
 public:
 	static float distanceToLine(const Ball& ball, const Plane& plane);
 
-	static bool checkProjection(const Ball& ball, const Obstacle& obstacle, const Plane& plane);
+	static bool checkProjection(const Ball& ball, const Plane& plane);
 
-	static int checkCollision(const Ball& ball, Obstacle& obstacle);
+	static bool checkCollisionCorner(const Ball& ball, const Vector2D& point);
+
+	static bool checkCollisionPlane(const Ball& ball, const Plane& plane);
+
+	static int checkCollisionObstacle(const Ball& ball, Obstacle& obstacle);
 };

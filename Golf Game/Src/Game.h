@@ -4,6 +4,10 @@
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include <iostream>
+#include "Obstacle.h"
+#include <vector>
+
+class Obstacle;
 
 class Game
 {
@@ -12,7 +16,7 @@ private:
 	bool win = false;
 	
 	SDL_Window* window;
-	
+
 public:
 	static const int WINDOW_WIDTH = 800;
 	static const int WINDOW_HEIGHT = 640;
@@ -23,6 +27,10 @@ public:
 
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
+
+	static SDL_FRect camera;
+
+	static std::vector<Obstacle*> obstacles;
 
 	Game();
 	~Game();

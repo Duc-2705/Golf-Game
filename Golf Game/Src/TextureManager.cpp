@@ -18,5 +18,6 @@ void TextureManager::setSrcRect(SDL_Texture* texture, SDL_Rect& src)
 
 void TextureManager::Draw(SDL_Texture* texture, SDL_Rect& src, SDL_FRect& dest)
 {
-	SDL_RenderCopyF(Game::renderer, texture, &src, &dest);
+	SDL_FRect renderRect = { dest.x - Game::camera.x, dest.y - Game::camera.y, dest.w, dest.h };
+	SDL_RenderCopyF(Game::renderer, texture, &src, &renderRect);
 }

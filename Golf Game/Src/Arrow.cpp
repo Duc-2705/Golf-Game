@@ -1,4 +1,5 @@
 #include "Arrow.h"
+#include "Utilities.h"
 
 Arrow::Arrow(Ball* ball)
 {
@@ -38,12 +39,12 @@ void Arrow::setAngle(double angle)
 
 void Arrow::setRange(float mag)
 {
-	destArrow.w = mag * SCALE;
-	if (destArrow.w > 50.0f) destArrow.w = 50.0f;
+	destArrow.w = std::min(50.0f, mag * SCALE);
 }
 
 void Arrow::render()
 {
-	SDL_RenderCopyExF(Game::renderer, texArrow, &srcArrow, &destArrow, angle, &centerRotate, SDL_FLIP_NONE);
+	SDL_FRect renderRect = { destArrow.x - Game::camera.x, destArrow.y - Game::camera.y, destArrow.w, destArrow.h };
+	SDL_RenderCopyExF(Game::renderer, texArrow, &srcArrow, &renderRect, angle, &centerRotate, SDL_FLIP_NONE);
 }
 

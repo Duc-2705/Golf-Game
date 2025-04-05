@@ -13,6 +13,7 @@
     <ClCompile Include="Src\Arrow.cpp" />
     <ClCompile Include="Src\Tile.cpp" />
     <ClCompile Include="Src\Map.cpp" />
+    <ClCompile Include="Src\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -26,5 +27,6 @@
     <ClInclude Include="Src\Arrow.h" />
     <ClInclude Include="Src\Tile.h" />
     <ClInclude Include="Src\Map.h" />
+    <ClInclude Include="Src\Utilities.h" />
   </ItemGroup>
 </Project>

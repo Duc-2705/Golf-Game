@@ -12,7 +12,7 @@ Map::~Map()
 	}
 }
 
-void Map::LoadMap(const char* path, int sizeX, int sizeY)
+void Map::LoadMap(const char* path,const int& sizeX, const int& sizeY)
 {
 	char c;
 	std::ifstream mapFile;

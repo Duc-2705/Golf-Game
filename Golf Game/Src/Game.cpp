@@ -17,10 +17,14 @@ Obstacle* obstacle1 = new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f);
 Obstacle* obstacle2 = new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f);
 Obstacle* obstacle3 = new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f);
 
-Ball* ball = new Ball(obstacle1, obstacle2, obstacle3);
+std::vector<Obstacle*> Game::obstacles = { obstacle1, obstacle2, obstacle3 };
+
+Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles);
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
+SDL_FRect Game::camera = { 0.0f , 0.0f , Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT };
+
 Mix_Chunk* Game::chunkHit = nullptr;
 Mix_Chunk* Game::chunkDrop = nullptr;
 Mix_Chunk* Game::chunkCollide = nullptr;
@@ -51,16 +55,12 @@ void Game::init(const char* title, bool fullscreen)
 	chunkDrop = Mix_LoadWAV("sound/hole_drop.wav");
 	chunkCollide = Mix_LoadWAV("sound/bass.wav");
 
-	map->LoadMap("assets/TileMap1.txt", 25, 20);
+	map->LoadMap("assets/TileMap2.txt", 50, 40);
 
-	obstacle1->init();
-	obstacle2->init();
-	obstacle3->init();
+	for (auto& obstacle : obstacles) obstacle->init();
 
 	ball->init();
-
 	hole->init();
-
 }
 
 void Game::handleEvents()
@@ -80,9 +80,8 @@ void Game::handleEvents()
 void Game::update()
 {
 	hole->update();
-	obstacle1->update();
-	obstacle2->update();
-	obstacle3->update();
+
+	for (auto& obstacle : obstacles) obstacle->update();
 
 	if (!win)
 	{
@@ -107,16 +106,11 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	
-	for (auto& tile : map->tiles)
-	{
-		tile->render();
-	}
+	for (auto& tile : map->tiles) tile->render();
 
 	hole->render();
 
-	obstacle1->render();
-	obstacle2->render();
-	obstacle3->render();
+	for (auto& obstacle : obstacles) obstacle->render();
 
 	if (!win) ball->render();
 
@@ -128,9 +122,8 @@ void Game::clean()
 	delete map;
 	delete ball;
 	delete hole;
-	delete obstacle1;
-	delete obstacle2;
-	delete obstacle3;
+
+	for (auto& obstacle : obstacles) delete obstacle;
 
 	Mix_FreeChunk(chunkHit);
 	Mix_FreeChunk(chunkDrop);

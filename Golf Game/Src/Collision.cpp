@@ -6,7 +6,7 @@ float Collision::distanceToLine(const Ball& ball, const Plane& plane)
 		plane.normal.j * (ball.center.y - plane.endPoint1.y));
 }
 
-bool Collision::checkProjection(const Ball& ball, const Obstacle& obstacle, const Plane& plane)
+bool Collision::checkProjection(const Ball& ball, const Plane& plane)
 {
 	float distance = Collision::distanceToLine(ball, plane);
 
@@ -16,21 +16,31 @@ bool Collision::checkProjection(const Ball& ball, const Obstacle& obstacle, cons
 	return (
 		(plane.normal.j == 0 || xProj >= std::min(plane.endPoint1.x, plane.endPoint2.x) && xProj <= std::max(plane.endPoint1.x, plane.endPoint2.x)) &&
 		(plane.normal.i == 0 || yProj >= std::min(plane.endPoint1.y, plane.endPoint2.y) && yProj <= std::max(plane.endPoint1.y, plane.endPoint2.y)));
-	}
+}
+
+bool Collision::checkCollisionPlane(const Ball& ball, const Plane& plane)
+{
+	return checkProjection(ball, plane) && std::fabs(distanceToLine(ball, plane)) <= ball.radius;
+}
+
+bool Collision::checkCollisionCorner(const Ball& ball, const Vector2D& point)
+{
+	return Vector2D::getMagnitude(ball.center.x - point.x, ball.center.y - point.y) <= ball.radius;
+}
 	
-int Collision::checkCollision(const Ball& ball, Obstacle& obstacle)
+int Collision::checkCollisionObstacle(const Ball& ball, Obstacle& obstacle)
 {
 	for (int i = 0; i < (int) obstacle.planes.size(); i ++)
 	{
 		Plane plane = obstacle.planes[i];
 
-		if (checkProjection(ball, obstacle, obstacle.planes[i]) && std::fabs(distanceToLine(ball, obstacle.planes[i])) <= ball.radius)//Va cham canh
+		if (checkCollisionPlane(ball, plane))//Va cham canh
 		{
 			obstacle.normal.normalize(plane.endPoint1.y - plane.endPoint2.y, plane.endPoint2.x - plane.endPoint1.x); //Dn vi hoa
 
 			return i;
 		}
-		else if (Vector2D::getMagnitude(ball.center.x - plane.endPoint1.x, ball.center.y - plane.endPoint1.y) <= ball.radius) //Va cham goc
+		else if (checkCollisionCorner(ball, plane.endPoint1)) //Va cham goc
 		{
 			//normal la vector tao boi center ball va position dinh cua obstacle tai goc do
 			obstacle.normal.normalize(ball.center.x - plane.endPoint1.x, ball.center.y - plane.endPoint1.y); //Don vi hoa

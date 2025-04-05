@@ -1,7 +1,7 @@
 #include "Tile.h"
 #include "TextureManager..h"
 
-Tile::Tile(int srcX, int srcY, int xPos, int yPos)
+Tile::Tile(const int& srcX, const int& srcY, const int& xPos, const int& yPos)
 {
 	srcTile.x = srcX;
 	srcTile.y = srcY;

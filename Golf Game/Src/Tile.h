@@ -13,7 +13,7 @@ public:
 	static const int TILE_WIDTH = 32;
 	static const int TILE_HEIGHT = 32;
 
-	Tile(int srcX, int srcY, int xPos, int yPos);
+	Tile(const int& srcX, const int& srcY, const int& xPos, const int& yPos);
 	~Tile();
 
 	void init();

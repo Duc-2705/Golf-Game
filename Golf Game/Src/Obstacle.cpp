@@ -1,7 +1,7 @@
 #include "Obstacle.h"
 #include "Game.h"
 
-Obstacle::Obstacle(const std::string shape, float x, float y, float w, float h)
+Obstacle::Obstacle(const std::string& shape, const float& x, const float& y, const float& w, const float& h)
 {
 	this->shape = shape;
 	position.x = x;

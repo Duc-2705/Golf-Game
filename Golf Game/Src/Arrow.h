@@ -17,7 +17,6 @@ private:
 	SDL_FPoint centerRotate;
 
 	double angle;
-
 	const float SCALE = 1;
 
 	Ball* ball;
@@ -26,12 +25,8 @@ public:
 	~Arrow();
 
 	void init();
-
 	void update();
-
 	void setAngle(double angle);
-
 	void setRange(float mag);
-
 	void render();
 };
