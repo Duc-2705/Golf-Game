@@ -4,12 +4,24 @@ SDL_Texture* TextureManager::LoadTexture(const char* path)
 {
 	SDL_Surface* surface = IMG_Load(path);
 
-	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255)); // xoa nen trang
+	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255)); // xoa nen trang background
 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
 	SDL_FreeSurface(surface);
+
 	return texture;
 }
+
+SDL_Texture* TextureManager::LoadTextureText(const char* text, SDL_Color color)
+{
+	SDL_Surface* surface = TTF_RenderText_Solid(Game::font, text, color);
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
+	SDL_FreeSurface(surface);
+
+	return texture;
+}
+
 void TextureManager::setSrcRect(SDL_Texture* texture, SDL_Rect& src)
 {
 	src.x = src.y = 0;

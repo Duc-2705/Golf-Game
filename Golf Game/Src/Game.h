@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
+#include "SDL_ttf.h"
 #include <iostream>
 #include "Obstacle.h"
 #include <vector>
@@ -13,7 +14,6 @@ class Game
 {
 private:
 	bool isRunning = false;
-	bool win = false;
 	
 	SDL_Window* window;
 
@@ -27,6 +27,8 @@ public:
 
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
+
+	static TTF_Font* font;
 
 	static SDL_FRect camera;
 

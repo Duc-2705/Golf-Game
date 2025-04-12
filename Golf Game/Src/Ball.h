@@ -33,7 +33,6 @@ private:
 	void playChunk(Mix_Chunk* chunk,const float& veloMag);
 	void motion();
 	void collisionHandling();
-	void updateCamera();
 
 public:
 	Vector2D position;
@@ -49,6 +48,9 @@ public:
 	~Ball();
 
 	void init();
+	void handleEvent(SDL_Event& event);
 	void update();
 	void render();
+	void updateCamera();
+	void reset(const float& xPos, const float& yPos);
 };

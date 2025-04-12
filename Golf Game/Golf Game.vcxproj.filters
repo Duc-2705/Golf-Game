@@ -14,6 +14,8 @@
     <ClCompile Include="Src\Tile.cpp" />
     <ClCompile Include="Src\Map.cpp" />
     <ClCompile Include="Src\Utilities.cpp" />
+    <ClCompile Include="Src\Button.cpp" />
+    <ClCompile Include="Src\Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -28,5 +30,7 @@
     <ClInclude Include="Src\Tile.h" />
     <ClInclude Include="Src\Map.h" />
     <ClInclude Include="Src\Utilities.h" />
+    <ClInclude Include="Src\Button.h" />
+    <ClInclude Include="Src\Background.h" />
   </ItemGroup>
 </Project>

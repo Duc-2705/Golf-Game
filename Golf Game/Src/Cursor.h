@@ -3,6 +3,7 @@
 #include "Arrow.h"
 #include "Ball.h"
 #include "Vector2D.h"
+#include "Game.h"
 
 class Ball;
 class Arrow;
@@ -27,7 +28,7 @@ public:
 	Cursor(Ball* ball);
 	~Cursor();
 
-	void handleEvents();
+	void handleEvent(SDL_Event& event);
 	void update();
 	bool Pulled() { return checkPulling; }
 
