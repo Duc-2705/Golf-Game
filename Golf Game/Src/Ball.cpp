@@ -44,6 +44,11 @@ void Ball::init()
 	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));
 }
 
+void Ball::handleEvent(SDL_Event& event)
+{
+	if (velocity.magnitude == 0) cursor->handleEvent(event);
+}
+
 void Ball::update()
 {
 	destBall.x = position.x;
@@ -52,7 +57,7 @@ void Ball::update()
 	center.x = position.x + radius;
 	center.y = position.y + radius;
 
-	if (velocity.magnitude == 0) cursor->handleEvents();
+	//if (velocity.magnitude == 0) cursor->handleEvents();
 
 	if (cursor->Pulled())
 	{
@@ -164,4 +169,18 @@ void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag)
 {
 	Mix_VolumeChunk(chunk, static_cast<int>(veloMag / MAX_VELOCITY * MAX_VOLUME));
 	Mix_PlayChannel(-1, chunk, 0);
+}
+
+void Ball::reset(const float& xPos, const float& yPos)
+{
+	position.x = xPos;
+	position.y = yPos;
+
+	velocity.Zero();
+
+	center.x = position.x + radius;
+	center.y = position.y + radius;
+
+	Game::camera.x = std::max(0.0f, std::min(center.x - Game::camera.w / 2, Map::MAP_WIDTH - Game::camera.w));
+	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));
 }

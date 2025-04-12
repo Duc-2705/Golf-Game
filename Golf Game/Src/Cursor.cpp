@@ -16,9 +16,9 @@ Cursor::~Cursor()
 	arrow = nullptr;
 }
 
-void Cursor::handleEvents()
+void Cursor::handleEvent(SDL_Event& event)
 {
-	switch (Game::event.type)
+	switch (event.type)
 	{
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_GetMouseState(&xMouseDown, &yMouseDown);

@@ -1,5 +1,5 @@
 #include "Game.h"
-#include <crtdbg.h> //thu vien check memory leak
+//#include <crtdbg.h> //thu vien check memory leak
 
 Game* game = nullptr;
 
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 	delete game;
 
-	_CrtDumpMemoryLeaks(); // Memory leak check
+	//_CrtDumpMemoryLeaks(); // Memory leak check
 
 	return 0;
 }
