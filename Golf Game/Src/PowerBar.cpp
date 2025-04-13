@@ -22,7 +22,7 @@ PowerBar::~PowerBar()
 
 void PowerBar::init()
 {
-	destMaxBar.x = destBar.x = Game::WINDOW_WIDTH - 100.0f;
+	destMaxBar.x = destBar.x = Game::WINDOW_WIDTH - 80.0f;
 	destBar.y = 200.0f;
 	destMaxBar.w = destBar.w = 50.0f;
 	destBar.h = 300.0f;
@@ -33,8 +33,8 @@ void PowerBar::update()
 {
 	power = cursor->getPercentageMagForce();
 
-	srcMaxBar.h = srcBar.h * power;
-	srcMaxBar.y = srcBar.y + srcBar.h - srcBar.h * power;
+	srcMaxBar.h = static_cast<int>(srcBar.h * power);
+	srcMaxBar.y = static_cast<int>(srcBar.y + srcBar.h - srcBar.h * power);
 
 	destMaxBar.h = destBar.h * power;
 	destMaxBar.y = destBar.y + destBar.h - destBar.h * power;

@@ -31,6 +31,7 @@
     <ClCompile Include="Src\Map.cpp" />
     <ClCompile Include="Src\Obstacle.cpp" />
     <ClCompile Include="Src\PowerBar.cpp" />
+    <ClCompile Include="Src\Shots.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
     <ClCompile Include="Src\Tile.cpp" />
     <ClCompile Include="Src\Utilities.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Src\Map.h" />
     <ClInclude Include="Src\Obstacle.h" />
     <ClInclude Include="Src\PowerBar.h" />
+    <ClInclude Include="Src\Shots.h" />
     <ClInclude Include="Src\TextureManager..h" />
     <ClInclude Include="Src\Tile.h" />
     <ClInclude Include="Src\Utilities.h" />

@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Background.h"
 #include "PowerBar.h"
+#include "Shots.h"
 
 Game::Game() {}
 Game::~Game() {}
@@ -18,8 +19,7 @@ Map* map = new Map();
 
 int Game::remainingShots = 3;
 
-Background* MenuBg;
-Background* WinStateBg;
+Background* MenuBg, *WinStateBg;
 
 Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
 
@@ -31,11 +31,11 @@ std::vector<Obstacle*> Game::obstacles = { obstacle1, obstacle2, obstacle3 };
 
 Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles);
 
-Button* playButton;
-Button* replayButton;
-Button* nextLevelButton;
+Button* playButton, *replayButton, *nextLevelButton;
 
 PowerBar* powerBar;
+
+Shots* shots;
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -101,6 +101,8 @@ void Game::init(const char* title, bool fullscreen)
 
 	playButton->init();
 	replayButton->init();
+
+	shots = new Shots();
 }
 
 void Game::handleEvents()
@@ -121,7 +123,7 @@ void Game::handleEvents()
 
 		}
 
-		else if (currentState = GameOver)
+		else if (currentState == GameOver)
 		{
 			replayButton->handleEvent(event);
 			if (replayButton->isPressed())
@@ -150,6 +152,8 @@ void Game::update()
 		ball->update();
 		
 		powerBar->update();
+
+		shots->update();
 
 		if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
 			std::fabs(ball->position.y - hole->position.y) <= 5.0f)
@@ -196,9 +200,10 @@ void Game::render()
 
 		ball->render();
 		powerBar->render();
+		shots->render();
 	}
 
-	else if (currentState = GameOver)
+	else if (currentState == GameOver)
 	{
 		for (auto& tile : map->tiles) tile->render();
 
@@ -207,6 +212,7 @@ void Game::render()
 		for (auto& obstacle : obstacles) obstacle->render();
 
 		powerBar->render();
+		shots->render();
 
 		WinStateBg->render();
 		replayButton->render();
@@ -225,6 +231,7 @@ void Game::clean()
 	delete playButton;
 	delete replayButton;
 	delete powerBar;
+	delete shots;
 
 	for (auto& obstacle : obstacles) delete obstacle;
 
