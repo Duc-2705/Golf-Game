@@ -40,8 +40,8 @@ void Ball::init()
 	center.x = position.x + radius;
 	center.y = position.y + radius;
 
-	Game::camera.x = std::max(0.0f, std::min(center.x - Game::camera.w / 2, Map::MAP_WIDTH - Game::camera.w));
-	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));
+	/*Game::camera.x = std::max(0.0f, std::min(center.x - Game::camera.w / 2, Map::MAP_WIDTH - Game::camera.w));
+	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));*/
 }
 
 void Ball::handleEvent(SDL_Event& event)
@@ -74,7 +74,7 @@ void Ball::update()
 
 	this->motion();
 
-	if (velocity.magnitude != 0) this->updateCamera();
+	if (!cursor->MouseDown) this->updateCamera();
 }
 
 void Ball::collisionHandling()
@@ -181,6 +181,4 @@ void Ball::reset(const float& xPos, const float& yPos)
 	center.x = position.x + radius;
 	center.y = position.y + radius;
 
-	Game::camera.x = std::max(0.0f, std::min(center.x - Game::camera.w / 2, Map::MAP_WIDTH - Game::camera.w));
-	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));
 }

@@ -39,15 +39,22 @@ Button::~Button()
 
 void Button::init()
 {
-	texButton = TextureManager::LoadTexture("assets/Button.png");
-	TextureManager::setSrcRect(texButton, srcButton);
 
 	if (texText)
 	{
+		texButton = TextureManager::LoadTexture("assets/Button.png");
+		TextureManager::setSrcRect(texButton, srcButton);
+
 		destText.x = destButton.x + 4;
 		destText.y = destButton.y + 4;
 		destText.w = destButton.w - 10;
 		destText.h = destButton.h - 10;
+	}
+
+	else
+	{
+		texButton = TextureManager::LoadTexture("assets/buttonPlay.png");
+		TextureManager::setSrcRect(texButton, srcButton);
 	}
 }
 
@@ -59,7 +66,10 @@ void Button::handleEvent(SDL_Event& event)
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
 		if (xMouse >= position.x && xMouse <= position.x + BUTTON_WIDTH &&
-			yMouse >= position.y && yMouse <= position.y + BUTTON_HEIGHT) mouseDown = true;
+			yMouse >= position.y && yMouse <= position.y + BUTTON_HEIGHT)
+		{
+			mouseDown = true;
+		}
 		break;
 
 	case SDL_MOUSEBUTTONUP:
@@ -67,12 +77,21 @@ void Button::handleEvent(SDL_Event& event)
 		{
 			pressed = true;
 			mouseDown = false;
+
 		}
+		break;
 	}
 }
 
 void Button::update()
 {
+	scale = (mouseDown) ? 0.8f : 1.0f;
+
+	destButton.w = BUTTON_WIDTH * scale;
+	destButton.h = BUTTON_HEIGHT * scale;
+
+	destButton.x = position.x + (BUTTON_WIDTH - destButton.w) / 2;
+	destButton.y = position.y + (BUTTON_HEIGHT - destButton.h) / 2;
 
 }
 

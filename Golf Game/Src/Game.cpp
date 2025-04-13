@@ -16,6 +16,7 @@ TTF_Font* Game::font = nullptr;
 Map* map = new Map();
 
 Background* background1;
+Background* background2;
 
 Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
 
@@ -29,6 +30,7 @@ Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT 
 
 Button* button1;
 Button* button2;
+Button* button3;
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -71,18 +73,20 @@ void Game::init(const char* title, bool fullscreen)
 
 	font = TTF_OpenFont("font/arial.ttf", 24);
 
-	button1 = new Button("START", (Game::WINDOW_WIDTH - 100) * 0.5f, (Game::WINDOW_HEIGHT - 50) * 0.5f, 100.0f, 50.0f);
-	button2 = new Button("PLAY AGAIN",(Game::WINDOW_WIDTH - 100) * 0.5f, (Game::WINDOW_HEIGHT - 50) * 0.5f, 100.0f, 50.0f);
-
 	map->LoadMap("assets/TileMap2.txt", 50, 40);
 
 	background1 = new Background("assets/MenuBg.png", 0.0f, 0.0f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
+	background2 = new Background("assets/WinState.png", (Game::WINDOW_WIDTH - 400) * 0.5f, (Game::WINDOW_HEIGHT - 400) * 0.5f, 400.0f, 400.0f);
 	background1->init();
+	background2->init();
 
 	for (auto& obstacle : obstacles) obstacle->init();
 
 	ball->init();
 	hole->init();
+
+	button1 = new Button((Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);
+	button2 = new Button("PLAY AGAIN", (Game::WINDOW_WIDTH - 100) * 0.5f, (Game::WINDOW_HEIGHT - 50) * 0.5f, 100.0f, 50.0f);
 
 	button1->init();
 	button2->init();
@@ -146,6 +150,7 @@ void Game::update()
 
 	else if (currentState == GameOver)
 	{
+		background2->update();
 		button2->update();
 	}
 }
@@ -179,6 +184,8 @@ void Game::render()
 
 		for (auto& obstacle : obstacles) obstacle->render();
 
+		background2->render();
+
 		button2->render();
 	}
 
@@ -189,6 +196,7 @@ void Game::clean()
 {
 	delete map;
 	delete background1;
+	delete background2;
 	delete ball;
 	delete hole;
 	delete button1;

@@ -17,6 +17,8 @@ private:
 	bool mouseDown = false;
 	bool pressed = false;
 
+	float scale = 1.0f;
+
 public:
 	float BUTTON_WIDTH;
 	float BUTTON_HEIGHT;
