@@ -15,14 +15,18 @@ private:
 	int xMouseUp, yMouseUp;
 	int xMouseState, yMouseState;
 
-	Arrow* arrow;
 	Ball* ball;
 
 	bool checkPulling = false;
 
+	const float maxMagForce = 600.0f;
+
 	void updateCamera();
 
 public:
+	Arrow* arrow;
+	float magForce = 0.0f;
+
 	bool MouseDown = false;
 
 	Cursor(Ball* ball);
@@ -31,6 +35,8 @@ public:
 	void handleEvent(SDL_Event& event);
 	void update();
 	bool Pulled() { return checkPulling; }
+
+	float getPercentageMagForce();
 
 	Vector2D Force();
 };

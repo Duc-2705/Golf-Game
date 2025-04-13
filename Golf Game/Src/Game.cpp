@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Button.h"
 #include "Background.h"
+#include "PowerBar.h"
 
 Game::Game() {}
 Game::~Game() {}
@@ -33,6 +34,8 @@ Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT 
 Button* playButton;
 Button* replayButton;
 Button* nextLevelButton;
+
+PowerBar* powerBar;
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -90,6 +93,9 @@ void Game::init(const char* title, bool fullscreen)
 	ball->init();
 	hole->init();
 
+	powerBar = new PowerBar(ball->cursor);
+	powerBar->init();
+
 	playButton = new Button("assets/buttonPlay.png", (Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);
 	replayButton = new Button("assets/ReplayButton.png", (Game::WINDOW_WIDTH - 80) * 0.5f, (Game::WINDOW_HEIGHT - 20) * 0.5f, 80.0f, 80.0f);
 
@@ -142,6 +148,8 @@ void Game::update()
 		for (auto& obstacle : obstacles) obstacle->update();
 
 		ball->update();
+		
+		powerBar->update();
 
 		if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
 			std::fabs(ball->position.y - hole->position.y) <= 5.0f)
@@ -155,7 +163,7 @@ void Game::update()
 		}
 		else if (remainingShots == 0 && ball->stop())
 		{
-			std::cout << "Lose!! " << remainingShots << std::endl;
+			std::cout << "You reached the shot limit! " << remainingShots << std::endl;
 			currentState = GameOver;
 			WinStateBg->changeTexture(WinStates[remainingShots]);
 		}
@@ -187,6 +195,7 @@ void Game::render()
 		for (auto& obstacle : obstacles) obstacle->render();
 
 		ball->render();
+		powerBar->render();
 	}
 
 	else if (currentState = GameOver)
@@ -196,6 +205,8 @@ void Game::render()
 		hole->render();
 
 		for (auto& obstacle : obstacles) obstacle->render();
+
+		powerBar->render();
 
 		WinStateBg->render();
 		replayButton->render();
@@ -213,6 +224,7 @@ void Game::clean()
 	delete hole;
 	delete playButton;
 	delete replayButton;
+	delete powerBar;
 
 	for (auto& obstacle : obstacles) delete obstacle;
 

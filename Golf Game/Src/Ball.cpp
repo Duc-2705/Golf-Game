@@ -75,6 +75,8 @@ void Ball::update()
 	this->motion();
 
 	if (!cursor->MouseDown) this->updateCamera();
+
+	cursor->update();
 }
 
 void Ball::collisionHandling()
@@ -161,7 +163,7 @@ void Ball::updateCamera()
 
 void Ball::render()
 {
-	cursor->update();
+	if (cursor->MouseDown) cursor->arrow->render();
 	TextureManager::Draw(texBall, srcBall, destBall);
 }
 

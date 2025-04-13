@@ -44,15 +44,19 @@ void Cursor::update()
 	if (MouseDown)
 	{
 		SDL_GetMouseState(&xMouseState, &yMouseState);
-		arrow->setAngle(atan2(yMouseState - yMouseDown, xMouseState - xMouseDown) * 180/ M_PI + 180); //Goc quay
+
+		arrow->setAngle(atan2(yMouseState - yMouseDown, xMouseState - xMouseDown) * 180 / M_PI + 180); //Goc quay
 		arrow->update();
 
-		float mag = Vector2D::getMagnitude(static_cast<float>(xMouseState - xMouseDown), static_cast<float>(yMouseState - yMouseDown));
+		magForce = std::min (maxMagForce, Vector2D::getMagnitude(static_cast<float>(xMouseState - xMouseDown), static_cast<float>(yMouseState - yMouseDown)));
 
-		arrow->setRange(mag); //Do lon mui ten
-		arrow->render();
+		arrow->setRange(magForce); //Do lon mui ten
 
 		this->updateCamera();
+	}
+	else
+	{
+		magForce = 0.0f;
 	}
 }
 
@@ -74,5 +78,12 @@ void Cursor::updateCamera()
 Vector2D Cursor::Force()
 {
 	checkPulling = false;
-	return Vector2D(xMouseUp - xMouseDown, yMouseUp - yMouseDown);
+	Vector2D force(xMouseUp - xMouseDown, yMouseUp - yMouseDown);
+	force.magnitude = std::min(maxMagForce, force.magnitude);
+	return force;
+}
+
+float Cursor::getPercentageMagForce()
+{
+	return magForce / maxMagForce;
 }

@@ -24,8 +24,6 @@ private:
 
 	SDL_Texture* texBall = nullptr;
 
-	Cursor* cursor;
-
 	std::vector<Obstacle*> obstacles;
 
 	std::vector<bool> isAbleToCollide;
@@ -38,6 +36,8 @@ public:
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D center;
+
+	Cursor* cursor;
 
 	float radius;
 
