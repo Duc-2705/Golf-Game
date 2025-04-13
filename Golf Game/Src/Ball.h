@@ -53,4 +53,5 @@ public:
 	void render();
 	void updateCamera();
 	void reset(const float& xPos, const float& yPos);
+	bool stop();
 };

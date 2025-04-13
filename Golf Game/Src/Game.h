@@ -34,6 +34,8 @@ public:
 
 	static std::vector<Obstacle*> obstacles;
 
+	static int remainingShots;
+
 	Game();
 	~Game();
 

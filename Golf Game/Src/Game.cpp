@@ -15,8 +15,10 @@ TTF_Font* Game::font = nullptr;
 
 Map* map = new Map();
 
-Background* background1;
-Background* background2;
+int Game::remainingShots = 3;
+
+Background* MenuBg;
+Background* WinStateBg;
 
 Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
 
@@ -28,9 +30,9 @@ std::vector<Obstacle*> Game::obstacles = { obstacle1, obstacle2, obstacle3 };
 
 Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles);
 
-Button* button1;
-Button* button2;
-Button* button3;
+Button* playButton;
+Button* replayButton;
+Button* nextLevelButton;
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
@@ -42,6 +44,8 @@ Mix_Chunk* Game::chunkCollide = nullptr;
 
 enum GameState { Menu, Playing, Pause, GameOver };
 GameState currentState = Menu;
+
+std::vector < const char* > WinStates = { "assets/WinState0Stars.png", "assets/WinState1Stars.png", "assets/WinState2Stars.png", "assets/WinState3Stars.png" };
 
 void Game::init(const char* title, bool fullscreen)
 {
@@ -75,21 +79,22 @@ void Game::init(const char* title, bool fullscreen)
 
 	map->LoadMap("assets/TileMap2.txt", 50, 40);
 
-	background1 = new Background("assets/MenuBg.png", 0.0f, 0.0f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
-	background2 = new Background("assets/WinState.png", (Game::WINDOW_WIDTH - 400) * 0.5f, (Game::WINDOW_HEIGHT - 400) * 0.5f, 400.0f, 400.0f);
-	background1->init();
-	background2->init();
+	MenuBg = new Background("assets/MenuBg.png", 0.0f, 0.0f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
+	WinStateBg = new Background(WinStates[3], (Game::WINDOW_WIDTH - 400) * 0.5f, (Game::WINDOW_HEIGHT - 400) * 0.5f, 400.0f, 400.0f);
+
+	MenuBg->init();
+	WinStateBg->init();
 
 	for (auto& obstacle : obstacles) obstacle->init();
 
 	ball->init();
 	hole->init();
 
-	button1 = new Button((Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);
-	button2 = new Button("PLAY AGAIN", (Game::WINDOW_WIDTH - 100) * 0.5f, (Game::WINDOW_HEIGHT - 50) * 0.5f, 100.0f, 50.0f);
+	playButton = new Button("assets/buttonPlay.png", (Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);
+	replayButton = new Button("assets/ReplayButton.png", (Game::WINDOW_WIDTH - 80) * 0.5f, (Game::WINDOW_HEIGHT - 20) * 0.5f, 80.0f, 80.0f);
 
-	button1->init();
-	button2->init();
+	playButton->init();
+	replayButton->init();
 }
 
 void Game::handleEvents()
@@ -100,8 +105,8 @@ void Game::handleEvents()
 
 		else if (currentState == Menu)
 		{
-			button1->handleEvent(event);
-			if (button1->isPressed()) currentState = Playing;
+			playButton->handleEvent(event);
+			if (playButton->isPressed()) currentState = Playing;
 		}
 
 		else if (currentState == Playing)
@@ -112,8 +117,8 @@ void Game::handleEvents()
 
 		else if (currentState = GameOver)
 		{
-			button2->handleEvent(event);
-			if (button2->isPressed())
+			replayButton->handleEvent(event);
+			if (replayButton->isPressed())
 			{
 				currentState = Playing;
 				ball->reset(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2);
@@ -126,8 +131,8 @@ void Game::update()
 {
 	if (currentState == Menu)
 	{
-		button1->update();
-		background1->update();
+		MenuBg->update();
+		playButton->update();
 	}
 
 	else if (currentState == Playing)
@@ -138,20 +143,28 @@ void Game::update()
 
 		ball->update();
 
-		if (std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
+		if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
 			std::fabs(ball->position.y - hole->position.y) <= 5.0f)
 		{
 			Mix_PlayChannel(-1, chunkDrop, 0);
 
-			std::cout << "Congratulation!!" << std::endl;
+			std::cout << "Congratulation!! " << remainingShots << std::endl;
+
 			currentState = GameOver;
+			WinStateBg->changeTexture(WinStates[remainingShots+1]);
+		}
+		else if (remainingShots == 0 && ball->stop())
+		{
+			std::cout << "Lose!! " << remainingShots << std::endl;
+			currentState = GameOver;
+			WinStateBg->changeTexture(WinStates[remainingShots]);
 		}
 	}
 
 	else if (currentState == GameOver)
 	{
-		background2->update();
-		button2->update();
+		WinStateBg->update();
+		replayButton->update();
 	}
 }
 
@@ -161,8 +174,8 @@ void Game::render()
 	
 	if (currentState == Menu)
 	{
-		background1->render();
-		button1->render();
+		MenuBg->render();
+		playButton->render();
 	}
 
 	else if (currentState == Playing)
@@ -184,9 +197,8 @@ void Game::render()
 
 		for (auto& obstacle : obstacles) obstacle->render();
 
-		background2->render();
-
-		button2->render();
+		WinStateBg->render();
+		replayButton->render();
 	}
 
 	SDL_RenderPresent(renderer);
@@ -195,12 +207,12 @@ void Game::render()
 void Game::clean()
 {
 	delete map;
-	delete background1;
-	delete background2;
+	delete MenuBg;
+	delete WinStateBg;
 	delete ball;
 	delete hole;
-	delete button1;
-	delete button2;
+	delete playButton;
+	delete replayButton;
 
 	for (auto& obstacle : obstacles) delete obstacle;
 

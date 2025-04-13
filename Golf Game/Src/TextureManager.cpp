@@ -6,6 +6,8 @@ SDL_Texture* TextureManager::LoadTexture(const char* path)
 
 	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255)); // xoa nen trang background
 
+	if (Game::renderer == nullptr) std::cerr << "Renderer is NULL" << std::endl;
+
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
 	SDL_FreeSurface(surface);
 

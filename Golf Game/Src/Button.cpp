@@ -1,24 +1,10 @@
 #include "Button.h"
 
-Button::Button(const float& xPos, const float& yPos, const float& w, const float& h)
+Button::Button(const char* path, const float& xPos, const float& yPos, const float& w, const float& h)
 {
-	destButton.x = xPos;
-	destButton.y = yPos;
-	destButton.w = w;
-	destButton.h = h;
-
-	position.x = xPos;
-	position.y = yPos;
-
-	BUTTON_WIDTH = w;
-	BUTTON_HEIGHT = h;
-}
-
-Button::Button(const char* text, const float& xPos, const float& yPos, const float& w, const float& h)
-{
-	SDL_Color color = { 0, 0, 0 };
-	texText = TextureManager::LoadTextureText(text, color);
-
+	texButton = TextureManager::LoadTexture(path);
+	TextureManager::setSrcRect(texButton, srcButton);
+	
 	destButton.x = xPos;
 	destButton.y = yPos;
 	destButton.w = w;
@@ -33,29 +19,12 @@ Button::Button(const char* text, const float& xPos, const float& yPos, const flo
 
 Button::~Button()
 {
-	SDL_DestroyTexture(texText);
 	SDL_DestroyTexture(texButton);
 }
 
 void Button::init()
 {
 
-	if (texText)
-	{
-		texButton = TextureManager::LoadTexture("assets/Button.png");
-		TextureManager::setSrcRect(texButton, srcButton);
-
-		destText.x = destButton.x + 4;
-		destText.y = destButton.y + 4;
-		destText.w = destButton.w - 10;
-		destText.h = destButton.h - 10;
-	}
-
-	else
-	{
-		texButton = TextureManager::LoadTexture("assets/buttonPlay.png");
-		TextureManager::setSrcRect(texButton, srcButton);
-	}
 }
 
 void Button::handleEvent(SDL_Event& event)
@@ -98,6 +67,14 @@ void Button::update()
 void Button::render()
 {
 	SDL_RenderCopyF(Game::renderer, texButton, &srcButton, &destButton);
+}
 
-	if (texText) SDL_RenderCopyF(Game::renderer, texText, nullptr, &destText);
+bool Button::isPressed()
+{
+	if (pressed)
+	{
+		pressed = false;
+		return true;
+	}
+	return false;
 }

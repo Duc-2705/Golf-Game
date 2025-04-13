@@ -57,8 +57,6 @@ void Ball::update()
 	center.x = position.x + radius;
 	center.y = position.y + radius;
 
-	//if (velocity.magnitude == 0) cursor->handleEvents();
-
 	if (cursor->Pulled())
 	{
 		velocity.magnitude = cursor->Force().magnitude; // Do lon cua Force
@@ -68,6 +66,8 @@ void Ball::update()
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 
 		playChunk(Game::chunkHit, velocity.magnitude);
+
+		Game::remainingShots--;
 	}
 	
 	this->collisionHandling();
@@ -181,4 +181,10 @@ void Ball::reset(const float& xPos, const float& yPos)
 	center.x = position.x + radius;
 	center.y = position.y + radius;
 
+	Game::remainingShots = 3;
+}
+
+bool Ball::stop()
+{
+	return (velocity.magnitude == 0);
 }

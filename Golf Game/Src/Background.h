@@ -12,9 +12,12 @@ private:
 
 public:
 	Background(const char* path, const float& xPos, const float& yPos, const float& w, const float& h);
+
 	~Background();
 
 	void init();
 	void update();
 	void render();
+
+	void changeTexture(const char* path);
 };
