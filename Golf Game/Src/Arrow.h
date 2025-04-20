@@ -4,8 +4,6 @@
 #include "TextureManager..h"
 #include "Game.h"
 
-class Ball;
-
 class Arrow
 {
 private:
@@ -19,9 +17,8 @@ private:
 	double angle;
 	const float SCALE = 1;
 
-	Ball* ball;
 public:
-	Arrow(Ball* ball);
+	Arrow();
 	~Arrow();
 
 	void init();

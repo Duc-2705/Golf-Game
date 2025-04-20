@@ -1,10 +1,10 @@
 #include "PowerBar.h"
 #include "Utilities.h"
 
-PowerBar::PowerBar(Cursor* cursor)
-{
-	this->cursor = cursor;
+extern Ball* ball;
 
+PowerBar::PowerBar()
+{
 	texBar = TextureManager::LoadTexture("assets/powerBar.png");
 	TextureManager::setSrcRect(texBar, srcBar);
 
@@ -31,7 +31,7 @@ void PowerBar::init()
 
 void PowerBar::update()
 {
-	power = cursor->getPercentageMagForce();
+	power = ball->cursor->getPercentageMagForce();
 
 	srcMaxBar.h = static_cast<int>(srcBar.h * power);
 	srcMaxBar.y = static_cast<int>(srcBar.y + srcBar.h - srcBar.h * power);

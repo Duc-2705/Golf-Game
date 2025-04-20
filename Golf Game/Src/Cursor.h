@@ -5,7 +5,6 @@
 #include "Vector2D.h"
 #include "Game.h"
 
-class Ball;
 class Arrow;
 
 class Cursor
@@ -14,8 +13,6 @@ private:
 	int xMouseDown, yMouseDown;
 	int xMouseUp, yMouseUp;
 	int xMouseState, yMouseState;
-
-	Ball* ball;
 
 	bool checkPulling = false;
 
@@ -29,7 +26,7 @@ public:
 
 	bool MouseDown = false;
 
-	Cursor(Ball* ball);
+	Cursor();
 	~Cursor();
 
 	void handleEvent(SDL_Event& event);

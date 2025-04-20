@@ -1,9 +1,11 @@
 #include "Arrow.h"
 #include "Utilities.h"
 
-Arrow::Arrow(Ball* ball)
+extern Ball* ball;
+
+Arrow::Arrow()
 {
-	this->ball = ball;
+
 }
 
 Arrow::~Arrow()

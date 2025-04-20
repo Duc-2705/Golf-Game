@@ -22,13 +22,13 @@ int Game::remainingShots = 3;
 
 Background* MenuBg, *WinStateBg;
 
-Hole* hole = new Hole (0.0f, 0.0f, 0.0f);
+Hole* hole = new Hole ((Map::MAP_WIDTH - Ball::BALL_HEIGHT) * 0.5f, 100.0f);
 
 Obstacle* obstacle1 = new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f);
 Obstacle* obstacle2 = new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f);
 Obstacle* obstacle3 = new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f);
 
-std::vector<Obstacle*> Game::obstacles = { obstacle1, obstacle2, obstacle3 };
+std::vector<Obstacle*> obstacles = { obstacle1, obstacle2, obstacle3 };
 
 Portal* EntryPortal, * ExitPortal;
 
@@ -96,12 +96,12 @@ void Game::init(const char* title, bool fullscreen)
 	EntryPortal = new Portal("assets/EntryPortal.png",800, 600, 80, 80);
 	ExitPortal = new Portal("assets/ExitPortal.png", 500, 600, 80, 80);
 
-	ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles, EntryPortal, ExitPortal);
-
+	ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2);
 	ball->init();
+
 	hole->init();
 
-	powerBar = new PowerBar(ball->cursor);
+	powerBar = new PowerBar();
 	powerBar->init();
 
 	playButton = new Button("assets/buttonPlay.png", (Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);

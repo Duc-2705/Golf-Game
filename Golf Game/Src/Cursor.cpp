@@ -3,10 +3,11 @@
 #include "Utilities.h"
 #include "Map.h"
 
-Cursor::Cursor(Ball* ball)
+extern Ball* ball;
+
+Cursor::Cursor()
 {
-	this->ball = ball;
-	arrow = new Arrow(ball);
+	arrow = new Arrow();
 	arrow->init();
 }
 

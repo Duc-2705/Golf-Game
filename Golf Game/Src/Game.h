@@ -32,8 +32,6 @@ public:
 
 	static SDL_FRect camera;
 
-	static std::vector<Obstacle*> obstacles;
-
 	static int remainingShots;
 
 	Game();

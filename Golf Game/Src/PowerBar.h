@@ -15,12 +15,10 @@ private:
 	SDL_Rect srcMaxBar;
 	SDL_FRect destMaxBar;
 
-	Cursor* cursor;
-
 public:
 	float power;
 
-	PowerBar(Cursor* cursor);
+	PowerBar();
 	~PowerBar();
 
 	void init();

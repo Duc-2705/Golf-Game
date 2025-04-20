@@ -4,19 +4,18 @@
 #include "Map.h"
 #include "Utilities.h"
 
-Ball::Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles, Portal* Entry, Portal* Exit)
+extern Portal* EntryPortal, * ExitPortal;
+extern std::vector<Obstacle*> obstacles;
+
+Ball::Ball(const float& xPos, const float& yPos)
 {
 	position.x = xPos;
 	position.y = yPos;
 
-	this->obstacles = obstacles;
 	for (int i = 0; i < obstacles.size(); i++)
 	{
 		isAbleToCollide.push_back(1);
 	}
-
-	this->EntryPortal = Entry;
-	this->ExitPortal = Exit;
 }
 
 Ball::~Ball()
@@ -31,7 +30,7 @@ void Ball::init()
 
 	TextureManager::setSrcRect(texBall, srcBall);
 
-	cursor = new Cursor(this);
+	cursor = new Cursor();
 
 	velocity.Zero();
 

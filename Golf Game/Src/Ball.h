@@ -8,6 +8,7 @@
 
 class Cursor;
 
+
 class Ball
 {
 private:
@@ -25,11 +26,8 @@ private:
 
 	SDL_Texture* texBall = nullptr;
 
-	std::vector<Obstacle*> obstacles;
-
 	std::vector<bool> isAbleToCollide;
 
-	Portal* EntryPortal, * ExitPortal;
 
 	void playChunk(Mix_Chunk* chunk,const float& veloMag);
 	void motion();
@@ -48,7 +46,7 @@ public:
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles, Portal* EntryPortal, Portal* ExitPortal);
+	Ball(const float& xPos, const float& yPos);
 	~Ball();
 
 	void init();
