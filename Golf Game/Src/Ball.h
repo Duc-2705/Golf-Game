@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Vector2D.h"
 #include "Obstacle.h"
+#include "Portal.h"
 
 class Cursor;
 
@@ -28,9 +29,12 @@ private:
 
 	std::vector<bool> isAbleToCollide;
 
+	Portal* EntryPortal, * ExitPortal;
+
 	void playChunk(Mix_Chunk* chunk,const float& veloMag);
 	void motion();
 	void collisionHandling();
+	void teleport();
 
 public:
 	Vector2D position;
@@ -44,13 +48,14 @@ public:
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles);
+	Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles, Portal* EntryPortal, Portal* ExitPortal);
 	~Ball();
 
 	void init();
 	void handleEvent(SDL_Event& event);
 	void update();
 	void render();
+
 	void updateCamera();
 	void reset(const float& xPos, const float& yPos);
 	bool stop();

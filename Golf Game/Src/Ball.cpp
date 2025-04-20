@@ -4,7 +4,7 @@
 #include "Map.h"
 #include "Utilities.h"
 
-Ball::Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles)
+Ball::Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles, Portal* Entry, Portal* Exit)
 {
 	position.x = xPos;
 	position.y = yPos;
@@ -14,6 +14,9 @@ Ball::Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& o
 	{
 		isAbleToCollide.push_back(1);
 	}
+
+	this->EntryPortal = Entry;
+	this->ExitPortal = Exit;
 }
 
 Ball::~Ball()
@@ -39,9 +42,6 @@ void Ball::init()
 
 	center.x = position.x + radius;
 	center.y = position.y + radius;
-
-	/*Game::camera.x = std::max(0.0f, std::min(center.x - Game::camera.w / 2, Map::MAP_WIDTH - Game::camera.w));
-	Game::camera.y = std::max(0.0f, std::min(center.y - Game::camera.h / 2, Map::MAP_HEIGHT - Game::camera.h));*/
 }
 
 void Ball::handleEvent(SDL_Event& event)
@@ -71,6 +71,8 @@ void Ball::update()
 	}
 	
 	this->collisionHandling();
+
+	this->teleport();
 
 	this->motion();
 
@@ -189,4 +191,15 @@ void Ball::reset(const float& xPos, const float& yPos)
 bool Ball::stop()
 {
 	return (velocity.magnitude == 0);
+}
+
+void Ball::teleport()
+{
+	if ((position.x >= EntryPortal->position.x && position.x <= EntryPortal->position.x + EntryPortal->PORTAL_WIDTH) &&
+		(position.y >= EntryPortal->position.y && position.y <= EntryPortal->position.y + EntryPortal->PORTAL_HEIGHT))
+	{
+		std::cout << "Teleport" << std::endl;
+		position.x += ExitPortal->position.x - EntryPortal->position.x;
+		position.y += ExitPortal->position.y - EntryPortal->position.y;
+	}
 }

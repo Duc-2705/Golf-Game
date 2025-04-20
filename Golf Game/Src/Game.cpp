@@ -9,6 +9,7 @@
 #include "Background.h"
 #include "PowerBar.h"
 #include "Shots.h"
+#include "Portal.h"
 
 Game::Game() {}
 Game::~Game() {}
@@ -29,7 +30,9 @@ Obstacle* obstacle3 = new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f);
 
 std::vector<Obstacle*> Game::obstacles = { obstacle1, obstacle2, obstacle3 };
 
-Ball* ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH /2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles);
+Portal* EntryPortal, * ExitPortal;
+
+Ball* ball;
 
 Button* playButton, *replayButton, *nextLevelButton;
 
@@ -89,6 +92,11 @@ void Game::init(const char* title, bool fullscreen)
 	WinStateBg->init();
 
 	for (auto& obstacle : obstacles) obstacle->init();
+
+	EntryPortal = new Portal("assets/EntryPortal.png",800, 600, 80, 80);
+	ExitPortal = new Portal("assets/ExitPortal.png", 500, 600, 80, 80);
+
+	ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2, Game::obstacles, EntryPortal, ExitPortal);
 
 	ball->init();
 	hole->init();
@@ -155,6 +163,9 @@ void Game::update()
 
 		shots->update();
 
+		EntryPortal->update();
+		ExitPortal->update();
+
 		if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
 			std::fabs(ball->position.y - hole->position.y) <= 5.0f)
 		{
@@ -198,9 +209,13 @@ void Game::render()
 
 		for (auto& obstacle : obstacles) obstacle->render();
 
+		EntryPortal->render();
+		ExitPortal->render();
+
 		ball->render();
 		powerBar->render();
 		shots->render();
+
 	}
 
 	else if (currentState == GameOver)
@@ -211,8 +226,14 @@ void Game::render()
 
 		for (auto& obstacle : obstacles) obstacle->render();
 
+		EntryPortal->render();
+		ExitPortal->render();
+
 		powerBar->render();
 		shots->render();
+
+		EntryPortal->render();
+		ExitPortal->render();
 
 		WinStateBg->render();
 		replayButton->render();
@@ -232,6 +253,8 @@ void Game::clean()
 	delete replayButton;
 	delete powerBar;
 	delete shots;
+	delete EntryPortal;
+	delete ExitPortal;
 
 	for (auto& obstacle : obstacles) delete obstacle;
 
