@@ -7,9 +7,10 @@ class Tile
 private:
 	SDL_Texture* texTile;
 	SDL_Rect srcTile;
-	SDL_FRect destTile;
 
 public:
+	SDL_FRect destTile;
+
 	static const int TILE_WIDTH = 32;
 	static const int TILE_HEIGHT = 32;
 

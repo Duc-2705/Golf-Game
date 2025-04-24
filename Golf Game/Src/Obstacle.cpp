@@ -1,6 +1,17 @@
 #include "Obstacle.h"
 #include "Game.h"
 
+Plane::Plane(Vector2D endPoint1, Vector2D endPoint2)
+{
+	this->endPoint1.x = endPoint1.x;
+	this->endPoint1.y = endPoint1.y;
+
+	this->endPoint2.x = endPoint2.x;
+	this->endPoint2.y = endPoint2.y;
+
+	normal.normalize(endPoint1.y - endPoint2.y, endPoint2.x - endPoint1.x);
+}
+
 Obstacle::Obstacle(const std::string& shape, const float& x, const float& y, const float& w, const float& h)
 {
 	this->shape = shape;

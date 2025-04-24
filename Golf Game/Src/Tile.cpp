@@ -21,7 +21,7 @@ Tile::~Tile()
 
 void Tile::init()
 {
-	texTile = TextureManager::LoadTexture("assets/TileSet1.png");
+	texTile = TextureManager::LoadTexture("assets/TileSet5.png");
 }
 
 void Tile::render()

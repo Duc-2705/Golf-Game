@@ -24,11 +24,17 @@ void Map::LoadMap(const char* path,const int& sizeX, const int& sizeY)
 			for (int x = 0; x < sizeX; x++)
 			{
 				mapFile >> c;
+				int srcY = (c - '0') * Tile::TILE_HEIGHT;
 
+				mapFile >> c;
 				int srcX = (c - '0') * Tile::TILE_WIDTH;
 
-				Tile* tile = new Tile(srcX, 0, x * Tile::TILE_WIDTH, y * Tile::TILE_HEIGHT);
+				Tile* tile = new Tile(srcX, srcY, x * Tile::TILE_WIDTH, y * Tile::TILE_HEIGHT);
+
 				tile->init();
+
+				if (srcX == 0 && srcY == 0) waterTiles.push_back(tile);
+				else if (srcY == 32 || ( srcY == 0 && srcX >= 32*3)) sandTiles.push_back(tile);
 				
 				tiles.push_back(tile);
 

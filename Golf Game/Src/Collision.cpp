@@ -50,3 +50,9 @@ int Collision::checkCollisionObstacle(const Ball& ball, Obstacle& obstacle)
 	}
 	return -1;
 }
+
+bool Collision::checkCollisionTile(const Ball* ball, const Tile* tile)
+{
+	return (ball->center.x >= tile->destTile.x && ball->center.x <= tile->destTile.x + tile->TILE_WIDTH &&
+		ball->center.y >= tile->destTile.y && ball->center.y <= tile->destTile.y + tile->TILE_HEIGHT);
+}

@@ -22,7 +22,7 @@ int Game::remainingShots = 3;
 
 Background* MenuBg, *WinStateBg;
 
-Hole* hole = new Hole ((Map::MAP_WIDTH - Ball::BALL_HEIGHT) * 0.5f, 100.0f);
+Hole* hole = new Hole (300.0f, 100.0f);
 
 Obstacle* obstacle1 = new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f);
 Obstacle* obstacle2 = new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f);
@@ -47,6 +47,7 @@ SDL_FRect Game::camera = { 0.0f , 0.0f , Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT
 Mix_Chunk* Game::chunkHit = nullptr;
 Mix_Chunk* Game::chunkDrop = nullptr;
 Mix_Chunk* Game::chunkCollide = nullptr;
+Mix_Chunk* Game::chunkWaterDrop = nullptr;
 
 enum GameState { Menu, Playing, Pause, GameOver };
 GameState currentState = Menu;
@@ -80,10 +81,11 @@ void Game::init(const char* title, bool fullscreen)
 	chunkHit = Mix_LoadWAV("sound/Hit.wav");
 	chunkDrop = Mix_LoadWAV("sound/hole_drop.wav");
 	chunkCollide = Mix_LoadWAV("sound/bass.wav");
+	chunkWaterDrop = Mix_LoadWAV("sound/water_drop.wav");
 
 	font = TTF_OpenFont("font/arial.ttf", 24);
 
-	map->LoadMap("assets/TileMap2.txt", 50, 40);
+	map->LoadMap("assets/TileMap5.txt", 40, 30);
 
 	MenuBg = new Background("assets/MenuBg.png", 0.0f, 0.0f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
 	WinStateBg = new Background(WinStates[3], (Game::WINDOW_WIDTH - 400) * 0.5f, (Game::WINDOW_HEIGHT - 400) * 0.5f, 400.0f, 400.0f);
@@ -94,7 +96,7 @@ void Game::init(const char* title, bool fullscreen)
 	for (auto& obstacle : obstacles) obstacle->init();
 
 	EntryPortal = new Portal("assets/EntryPortal.png",800, 600, 80, 80);
-	ExitPortal = new Portal("assets/ExitPortal.png", 500, 600, 80, 80);
+	ExitPortal = new Portal("assets/ExitPortal.png", 200, 200, 80, 80);
 
 	ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, Map::MAP_HEIGHT / 2 - Ball::BALL_HEIGHT / 2);
 	ball->init();
@@ -166,7 +168,16 @@ void Game::update()
 		EntryPortal->update();
 		ExitPortal->update();
 
-		if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
+		if (ball->checkWaterDrop())
+		{
+			Mix_PlayChannel(-1, chunkWaterDrop, 0);
+
+			std::cout << "Water Drop! " << remainingShots << std::endl;
+
+			currentState = GameOver;
+			WinStateBg->changeTexture(WinStates[0]);
+		}
+		else if ( std::fabs(ball->position.x - hole->position.x) <= 5.0f &&
 			std::fabs(ball->position.y - hole->position.y) <= 5.0f)
 		{
 			Mix_PlayChannel(-1, chunkDrop, 0);
@@ -261,6 +272,7 @@ void Game::clean()
 	Mix_FreeChunk(chunkHit);
 	Mix_FreeChunk(chunkDrop);
 	Mix_FreeChunk(chunkCollide);
+	Mix_FreeChunk(chunkWaterDrop);
 
 	TTF_CloseFont(font);
 

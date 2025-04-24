@@ -6,10 +6,12 @@
 class Map
 {
 public:
-	static const int MAP_WIDTH = 1600;
-	static const int MAP_HEIGHT = 1280;
+	static const int MAP_WIDTH = 1280;
+	static const int MAP_HEIGHT = 960;
 
 	std::vector<Tile*> tiles;
+	std::vector<Tile*> sandTiles;
+	std::vector<Tile*> waterTiles;
 	
 	Map();
 	~Map();

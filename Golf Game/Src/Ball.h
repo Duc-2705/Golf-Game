@@ -13,8 +13,8 @@ class Ball
 {
 private:
 	const float dTime = 0.016f; //thoi gian 1 frame
-	const float FRICTION = -80.0f; //giam toc do ma sat
 	const float LOSS = 0.5f; // giam nang luong do va cham
+	float FRICTION = -80.0f; //giam toc do ma sat
 	
 	const int MAX_VELOCITY = 150;
 	const int MAX_VOLUME = 128;
@@ -27,12 +27,13 @@ private:
 	SDL_Texture* texBall = nullptr;
 
 	std::vector<bool> isAbleToCollide;
+	bool waterDrop = false;
 
-
-	void playChunk(Mix_Chunk* chunk,const float& veloMag);
+	void playChunk(Mix_Chunk* chunk,const float& veloMag, const int& loops);
 	void motion();
 	void collisionHandling();
 	void teleport();
+	void handleCollisionTiles();
 
 public:
 	Vector2D position;
@@ -57,4 +58,5 @@ public:
 	void updateCamera();
 	void reset(const float& xPos, const float& yPos);
 	bool stop();
+	bool checkWaterDrop();
 };

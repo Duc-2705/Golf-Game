@@ -6,6 +6,7 @@
 
 extern Portal* EntryPortal, * ExitPortal;
 extern std::vector<Obstacle*> obstacles;
+extern Map* map;
 
 Ball::Ball(const float& xPos, const float& yPos)
 {
@@ -64,12 +65,14 @@ void Ball::update()
 
 		velocity.j = (cursor->Force().magnitude) ? - (cursor->Force().y / cursor->Force().magnitude) : 0; // Tranh viec chia cho 0
 
-		playChunk(Game::chunkHit, velocity.magnitude);
+		playChunk(Game::chunkHit, velocity.magnitude, 0);
 
 		Game::remainingShots--;
 	}
 	
 	this->collisionHandling();
+
+	this->handleCollisionTiles();
 
 	this->teleport();
 
@@ -99,7 +102,7 @@ void Ball::collisionHandling()
 
 			isAbleToCollide[i] = false;
 
-			playChunk(Game::chunkCollide, velocity.magnitude);
+			playChunk(Game::chunkCollide, velocity.magnitude, 0);
 
 			std::cout << obstacle->normal.i << " " << obstacle->normal.j << " Collision plane " << index << std::endl;
 		}
@@ -124,7 +127,7 @@ void Ball::motion()
 		velocity.i *= -1.0f; //Doi chieu do va cham
 		velocity.magnitude *= LOSS; //Giam nang luong do va cham
 
-		playChunk(Game::chunkCollide, velocity.magnitude);
+		playChunk(Game::chunkCollide, velocity.magnitude, 0);
 	}
 	else if (position.x < 0)
 	{
@@ -132,7 +135,7 @@ void Ball::motion()
 		velocity.i *= -1.0f;
 		velocity.magnitude *= LOSS;
 
-		playChunk(Game::chunkCollide, velocity.magnitude);
+		playChunk(Game::chunkCollide, velocity.magnitude, 0);
 	}
 
 	if (position.y + destBall.h > Game::camera.y + Game::camera.h)
@@ -141,7 +144,7 @@ void Ball::motion()
 		velocity.j *= -1.0f;
 		velocity.magnitude *= LOSS;
 
-		playChunk(Game::chunkCollide, velocity.magnitude);
+		playChunk(Game::chunkCollide, velocity.magnitude, 0);
 	}
 	else if (position.y < 0)
 	{
@@ -149,7 +152,7 @@ void Ball::motion()
 		velocity.j *= -1.0f;
 		velocity.magnitude *= LOSS;
 
-		playChunk(Game::chunkCollide, velocity.magnitude);
+		playChunk(Game::chunkCollide, velocity.magnitude, 0);
 	}
 }
 
@@ -168,10 +171,10 @@ void Ball::render()
 	TextureManager::Draw(texBall, srcBall, destBall);
 }
 
-void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag)
+void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag, const int& loops)
 {
 	Mix_VolumeChunk(chunk, static_cast<int>(veloMag / MAX_VELOCITY * MAX_VOLUME));
-	Mix_PlayChannel(-1, chunk, 0);
+	Mix_PlayChannel(-1, chunk, loops);
 }
 
 void Ball::reset(const float& xPos, const float& yPos)
@@ -185,6 +188,7 @@ void Ball::reset(const float& xPos, const float& yPos)
 	center.y = position.y + radius;
 
 	Game::remainingShots = 3;
+	waterDrop = false;
 }
 
 bool Ball::stop()
@@ -198,7 +202,37 @@ void Ball::teleport()
 		(position.y >= EntryPortal->position.y && position.y <= EntryPortal->position.y + EntryPortal->PORTAL_HEIGHT))
 	{
 		std::cout << "Teleport" << std::endl;
-		position.x += ExitPortal->position.x - EntryPortal->position.x;
-		position.y += ExitPortal->position.y - EntryPortal->position.y;
+		position.x += ExitPortal->position.x - EntryPortal->position.x + BALL_WIDTH/2;
+		position.y += ExitPortal->position.y - EntryPortal->position.y + BALL_HEIGHT/2;
 	}
+}
+
+void Ball::handleCollisionTiles()
+{
+	bool check = false;
+
+	for (auto sand : map->sandTiles)
+	{
+		if (Collision::checkCollisionTile(this, sand))
+		{
+			check = true;
+			break;
+		}
+	}
+	FRICTION = (check) ? -200.0f : -80.0f;
+
+	std::cout << FRICTION << std::endl;
+}
+
+bool Ball::checkWaterDrop()
+{
+	for (auto water : map->waterTiles)
+	{
+		if (Collision::checkCollisionTile(this, water))
+		{
+			waterDrop = true;
+			break;
+		}
+	}
+	return waterDrop;
 }
