@@ -21,9 +21,27 @@ Click Code (Green button) -> download file ZIP -> giải nén file ZIP
 
 # 1. Bắt đầu game
 
-Chờ một chút rồi click vào nút “CLICK TO START!” để bắt đầu chơi game.
+Click vào nút “PLAY” để bắt đầu chơi game.
 <div style="text-align: center;">
-
-![ezgif com-video-to-gif](resources/preview/loading.gif)
+  
+![Image](https://github.com/user-attachments/assets/7298504b-cd63-4997-9ade-1354b85e9850)
 
 </div>
+
+Lúc này sẽ xuất hiên một button tường ứng với các màn chơi có độ khác khác nhau, người chơi click vào 1 trong các màn để bắt đầu chơi.
+
+![Image](https://github.com/user-attachments/assets/43336e5d-f403-4d8e-853b-f65c250719ce)
+
+# 2. Các thành phần trong game
+
+## a. Ball (Bóng) ![Image](https://github.com/user-attachments/assets/9bb390bb-0738-4124-9550-36bc037ae664)
+
+Là đối tượng chính mà người chơi điều khiển.
+
+Người chơi tương tác bằng cách kéo chuột để điều chỉnh hướng và lực đánh (kéo càng xa thì đánh càng mạnh).
+
+Khi thả chuột, bóng được bắn ra theo hướng ngược lại với hướng đã kéo.
+
+Camera sẽ zoom theo hướng kéo để hỗ trợ nhắm chính xác.
+
+
