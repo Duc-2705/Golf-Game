@@ -30,7 +30,7 @@ Shots* shots;
 
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
-SDL_FRect Game::camera = { 0.0f , 0.0f , Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT };
+SDL_FRect Game::camera = { (Map::MAP_WIDTH - Game::WINDOW_WIDTH) * 0.5f , (Map::MAP_HEIGHT - Game::WINDOW_HEIGHT) * 0.5f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT };
 
 Mix_Chunk* Game::chunkHit = nullptr;
 Mix_Chunk* Game::chunkDrop = nullptr;
@@ -42,7 +42,7 @@ GameState currentState = Menu;
 
 std::vector < const char* > WinStates = { "assets/WinState0Stars.png", "assets/WinState1Stars.png", "assets/WinState2Stars.png", "assets/WinState3Stars.png" };
 
-std::vector < const char* > MapFiles = { "assets/TileMap5.txt", "assets/TileMap6.txt"};
+std::vector < const char* > MapFiles = { "assets/MapLevel1.txt", "assets/MapLevel2.txt", "assets/MapLevel3.txt"};
 int Game::currentLevel = 0;
 
 void Game::init(const char* title, bool fullscreen)
@@ -111,7 +111,7 @@ void Game::handleEvents()
 		}
 
 		else if (currentState == Playing)
-		{	
+		{
 			map->ball->handleEvent(event);
 
 		}

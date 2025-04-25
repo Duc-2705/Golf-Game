@@ -21,9 +21,8 @@ void Map::loadMapLvl(const int& level)
 
 	if (level == 0)
 	{
-		obstacles.emplace_back(new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f));
-		obstacles.emplace_back(new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f));
-		obstacles.emplace_back(new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 512.0f, 384.0f, 416.0f, 64.0f));
+		obstacles.emplace_back(new Obstacle("Triangle", 1088.0f, 64.0f, 128.0f, 128.0f));
 
 		for (auto obstacle : obstacles) obstacle->init();
 
@@ -33,19 +32,18 @@ void Map::loadMapLvl(const int& level)
 		hole = new Hole(1000.0f, 100.0f);
 		hole->init();
 
-		EntryPortal = new Portal("assets/EntryPortal.png", 800, 600, 80, 80);
-		ExitPortal = new Portal("assets/ExitPortal.png", 800, 200, 80, 80);
+		EntryPortal = new Portal("assets/EntryPortal.png", 800, 500, 80, 80);
+		ExitPortal = new Portal("assets/ExitPortal.png", 900, 220, 80, 80);
 	}
 
 	else if (level == 1)
 	{
-		obstacles.emplace_back(new Obstacle("Rectangle", 450.0f, 300.0f, 200.0f, 100.0f));
-		obstacles.emplace_back(new Obstacle("Triangle", 400.0f, 100.0f, 300.0f, 100.0f));
-		obstacles.emplace_back(new Obstacle("Triangle", 50.0f, 500.0f, 100.0f, 100.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 896.0f, 160.0f, 64.0f, 200.0f));
+		obstacles.emplace_back(new Obstacle("Triangle", 384.0f, 96.0f, 300.0f, 100.0f));
 
 		for (auto obstacle : obstacles) obstacle->init();
 
-		ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2, 600.0f);
+		ball = new Ball(Map::MAP_WIDTH / 2 - Ball::BALL_WIDTH / 2 , 800.0f);
 		ball->init();
 
 		hole = new Hole(1000.0f, 100.0f);
@@ -53,6 +51,27 @@ void Map::loadMapLvl(const int& level)
 
 		EntryPortal = new Portal("assets/EntryPortal.png", 800, 600, 80, 80);
 		ExitPortal = new Portal("assets/ExitPortal.png", 800, 200, 80, 80);
+
+	}
+
+	else if (level == 2)
+	{
+		obstacles.emplace_back(new Obstacle("Rectangle", 576.0f, 96.0f, 320.0f, 32.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 576.0f, 288.0f, 320.0f, 32.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 576.0f, 128.0f, 32.0f, 160.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 864.0f, 128.0f, 32.0f, 160.0f));
+		obstacles.emplace_back(new Obstacle("Rectangle", 400.0f, 512.0f, 32.0f, 120.0f));
+
+		for (auto obstacle : obstacles) obstacle->init();
+
+		ball = new Ball(650.0f , 750.0f);
+		ball->init();
+
+		hole = new Hole(750.0f, 150.0f);
+		hole->init();
+
+		EntryPortal = new Portal("assets/EntryPortal.png", 480, 475, 80, 80);
+		ExitPortal = new Portal("assets/ExitPortal.png", 600, 160, 80, 80);
 
 	}
 }

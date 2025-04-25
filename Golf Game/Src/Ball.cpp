@@ -16,6 +16,8 @@ Ball::Ball(const float& xPos, const float& yPos)
 	{
 		isAbleToCollide.push_back(1);
 	}
+
+	Game::camera = { (Map::MAP_WIDTH - Game::WINDOW_WIDTH) * 0.5f , (Map::MAP_HEIGHT - Game::WINDOW_HEIGHT) * 0.5f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT };
 }
 
 Ball::~Ball()
@@ -178,6 +180,8 @@ void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag, const int& loops)
 
 void Ball::reset()
 {
+	Game::camera = { (Map::MAP_WIDTH - Game::WINDOW_WIDTH) * 0.5f , (Map::MAP_HEIGHT - Game::WINDOW_HEIGHT) * 0.5f, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT };
+
 	position.x = xSpawn;
 	position.y = ySpawn;
 
@@ -189,8 +193,6 @@ void Ball::reset()
 	Game::remainingShots = 3;
 	waterDrop = false;
 
-	Game::camera.x = std::max(0.0f, std::min(center.x - Game::WINDOW_WIDTH / 2, Map::MAP_WIDTH - Game::camera.w));
-	Game::camera.y = std::max(0.0f, std::min(center.y - Game::WINDOW_HEIGHT / 2, Map::MAP_HEIGHT - Game::camera.h));
 }
 
 bool Ball::stop()
