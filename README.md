@@ -1,7 +1,6 @@
 # ⛳ MINIGOLF
 
 - Thử nghiệm game: 
-- Phá đảo game: 
 
 # Giới thiệu game
 
@@ -61,4 +60,20 @@ Có thể cản bóng, làm đổi hướng và giảm lực của bóng khi b�
 Đôi lúc, chướng ngại vật lại trở nên rất hữu ích nếu bạn biết vận dụng đúng cách.
 
 ## d. Teleport Portal (Cổng dịch chuyển)
+
+Là cặp cổng Entry Portal và Exit Portal, dùng để dịch chuyển bóng từ vị trí này sang vị trí khác trong bản đồ.
+
+Khi bóng chạm vào cổng vào (Entry portal), nó sẽ ngay lập tức xuất hiện tại vị trí của cổng ra (Exit portal).
+
+Giữ nguyên hướng di chuyển và vận tốc hiện tại của bóng sau khi dịch chuyển, tạo cảm giác mượt mà và liên tục.
+
+Người chơi có thể vận dụng để vượt những chướng ngại vật mà không thể đi qua.
+
+## e. Map (Bản đồ)
+
+Grass: là nơi bóng có thể di chuyển.
+
+Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển hơn do ma sát.
+
+Water: nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
