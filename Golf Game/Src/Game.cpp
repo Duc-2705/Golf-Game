@@ -22,7 +22,8 @@ int Game::remainingShots = 3;
 
 Background* MenuBg, *WinStateBg;
 
-Button* playButton, *replayButton, *nextLevelButton;
+Button* playButton, * replayButton, * nextLevelButton, * levelButton;
+Button* lvl1Button, * lvl2Button, * lvl3Button;
 
 PowerBar* powerBar;
 
@@ -37,7 +38,7 @@ Mix_Chunk* Game::chunkDrop = nullptr;
 Mix_Chunk* Game::chunkCollide = nullptr;
 Mix_Chunk* Game::chunkWaterDrop = nullptr;
 
-enum GameState { Menu, Playing, Pause, GameOver };
+enum GameState { Menu, Playing, Level, Pause, GameOver };
 GameState currentState = Menu;
 
 std::vector < const char* > WinStates = { "assets/WinState0Stars.png", "assets/WinState1Stars.png", "assets/WinState2Stars.png", "assets/WinState3Stars.png" };
@@ -90,10 +91,20 @@ void Game::init(const char* title, bool fullscreen)
 	playButton = new Button("assets/buttonPlay.png", (Game::WINDOW_WIDTH - 150) * 0.5f, (Game::WINDOW_HEIGHT - 150) * 0.5f + 50.0f, 150.0f, 80.0f);
 	replayButton = new Button("assets/ReplayButton.png", (Game::WINDOW_WIDTH - 80) * 0.5f, (Game::WINDOW_HEIGHT - 20) * 0.5f, 80.0f, 80.0f);
 	nextLevelButton = new Button("assets/PlayButton.png", (Game::WINDOW_WIDTH - 80) * 0.5f + 80.0f, (Game::WINDOW_HEIGHT - 20) * 0.5f, 80.0f, 80.0f);
+	levelButton = new Button("assets/LevelButton.png", (Game::WINDOW_WIDTH - 80) * 0.5f - 80.0f, (Game::WINDOW_HEIGHT - 20) * 0.5f, 80.0f, 80.0f);
+
+	lvl1Button= new Button("assets/Level1.png", (Game::WINDOW_WIDTH - 100) * 0.5f - 100.0f, (Game::WINDOW_HEIGHT - 100) * 0.5f, 100.0f, 100.0f);
+	lvl2Button = new Button("assets/Level2.png", (Game::WINDOW_WIDTH - 100) * 0.5f , (Game::WINDOW_HEIGHT - 100) * 0.5f, 100.0f, 100.0f);
+	lvl3Button = new Button("assets/Level3.png", (Game::WINDOW_WIDTH - 100) * 0.5f + 100.0f, (Game::WINDOW_HEIGHT - 100) * 0.5f, 100.0f, 100.0f);
 
 	playButton->init();
 	replayButton->init();
 	nextLevelButton->init();
+	levelButton->init();
+
+	lvl1Button->init();
+	lvl2Button->init();
+	lvl3Button->init();
 
 	shots = new Shots();
 }
@@ -107,13 +118,46 @@ void Game::handleEvents()
 		else if (currentState == Menu)
 		{
 			playButton->handleEvent(event);
-			if (playButton->isPressed()) currentState = Playing;
+			if (playButton->isPressed()) currentState = Level;
 		}
 
 		else if (currentState == Playing)
 		{
 			map->ball->handleEvent(event);
 
+		}
+
+		else if (currentState == Level)
+		{
+			lvl1Button->handleEvent(event);
+			if (lvl1Button->isPressed())
+			{
+				currentState = Playing;
+				currentLevel = 0;
+				remainingShots = 3;
+
+				map->loadMapLvl(currentLevel);
+			}
+
+			lvl2Button->handleEvent(event);
+			if (lvl2Button->isPressed())
+			{
+				currentState = Playing;
+				currentLevel = 1;
+				remainingShots = 3;
+
+				map->loadMapLvl(currentLevel);
+			}
+
+			lvl3Button->handleEvent(event);
+			if (lvl3Button->isPressed())
+			{
+				currentState = Playing;
+				currentLevel = 2;
+				remainingShots = 3;
+
+				map->loadMapLvl(currentLevel);
+			}
 		}
 
 		else if (currentState == GameOver)
@@ -133,6 +177,12 @@ void Game::handleEvents()
 				remainingShots = 3;
 				currentLevel++;
 				map->loadMapLvl(currentLevel % MapFiles.size());
+			}
+
+			levelButton->handleEvent(event);
+			if (levelButton->isPressed())
+			{
+				currentState = Level;
 			}
 		}
 	}
@@ -188,11 +238,19 @@ void Game::update()
 		}
 	}
 
+	else if (currentState == Level)
+	{
+		lvl1Button->update();
+		lvl2Button->update();
+		lvl3Button->update();
+	}
+
 	else if (currentState == GameOver)
 	{
 		WinStateBg->update();
 		replayButton->update();
 		nextLevelButton->update();
+		levelButton->update();
 	}
 }
 
@@ -223,6 +281,13 @@ void Game::render()
 
 	}
 
+	else if (currentState == Level)
+	{
+		lvl1Button->render();
+		lvl2Button->render();
+		lvl3Button->render();
+	}
+
 	else if (currentState == GameOver)
 	{
 		for (auto& tile : map->tiles) tile->render();
@@ -243,6 +308,7 @@ void Game::render()
 		WinStateBg->render();
 		replayButton->render();
 		nextLevelButton->render();
+		levelButton->render();
 	}
 
 	SDL_RenderPresent(renderer);
@@ -256,6 +322,10 @@ void Game::clean()
 	delete playButton;
 	delete replayButton;
 	delete nextLevelButton;
+	delete levelButton;
+	delete lvl1Button;
+	delete lvl2Button;
+	delete lvl3Button;
 	delete powerBar;
 	delete shots;
 
