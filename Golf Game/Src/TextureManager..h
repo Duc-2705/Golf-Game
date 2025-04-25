@@ -3,7 +3,6 @@
 
 class TextureManager
 {
-private:
 public:
 	static SDL_Texture* LoadTexture(const char* path);
 

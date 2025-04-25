@@ -1,10 +1,11 @@
 #include "PowerBar.h"
 #include "Utilities.h"
+#include "Map.h"
 
-PowerBar::PowerBar(Cursor* cursor)
+extern Map* map;
+
+PowerBar::PowerBar()
 {
-	this->cursor = cursor;
-
 	texBar = TextureManager::LoadTexture("assets/powerBar.png");
 	TextureManager::setSrcRect(texBar, srcBar);
 
@@ -31,7 +32,7 @@ void PowerBar::init()
 
 void PowerBar::update()
 {
-	power = cursor->getPercentageMagForce();
+	power = map->ball->cursor->getPercentageMagForce();
 
 	srcMaxBar.h = static_cast<int>(srcBar.h * power);
 	srcMaxBar.y = static_cast<int>(srcBar.y + srcBar.h - srcBar.h * power);

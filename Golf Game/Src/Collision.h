@@ -3,6 +3,7 @@
 #include "Ball.h"
 #include "Obstacle.h"
 #include "Vector2D.h"
+#include "Tile.h"
 
 class Collision
 {
@@ -16,4 +17,6 @@ public:
 	static bool checkCollisionPlane(const Ball& ball, const Plane& plane);
 
 	static int checkCollisionObstacle(const Ball& ball, Obstacle& obstacle);
+
+	static bool checkCollisionTile(const Ball* ball, const Tile* tile);
 };

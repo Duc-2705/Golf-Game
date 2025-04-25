@@ -8,8 +8,6 @@
 #include "Obstacle.h"
 #include <vector>
 
-class Obstacle;
-
 class Game
 {
 private:
@@ -24,6 +22,7 @@ public:
 	static Mix_Chunk* chunkHit;
 	static Mix_Chunk* chunkDrop;
 	static Mix_Chunk* chunkCollide;
+	static Mix_Chunk* chunkWaterDrop;
 
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
@@ -32,9 +31,9 @@ public:
 
 	static SDL_FRect camera;
 
-	static std::vector<Obstacle*> obstacles;
-
 	static int remainingShots;
+
+	static int currentLevel;
 
 	Game();
 	~Game();

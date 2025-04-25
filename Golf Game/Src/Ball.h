@@ -8,12 +8,13 @@
 
 class Cursor;
 
+
 class Ball
 {
 private:
 	const float dTime = 0.016f; //thoi gian 1 frame
-	const float FRICTION = -80.0f; //giam toc do ma sat
 	const float LOSS = 0.5f; // giam nang luong do va cham
+	float FRICTION = -80.0f; //giam toc do ma sat
 	
 	const int MAX_VELOCITY = 150;
 	const int MAX_VOLUME = 128;
@@ -23,18 +24,18 @@ private:
 	SDL_Rect srcBall;
 	SDL_FRect destBall;
 
+	float xSpawn, ySpawn;
+
 	SDL_Texture* texBall = nullptr;
 
-	std::vector<Obstacle*> obstacles;
-
 	std::vector<bool> isAbleToCollide;
+	bool waterDrop = false;
 
-	Portal* EntryPortal, * ExitPortal;
-
-	void playChunk(Mix_Chunk* chunk,const float& veloMag);
+	void playChunk(Mix_Chunk* chunk,const float& veloMag, const int& loops);
 	void motion();
 	void collisionHandling();
 	void teleport();
+	void handleCollisionTiles();
 
 public:
 	Vector2D position;
@@ -48,7 +49,7 @@ public:
 	static const int BALL_WIDTH = 30;
 	static const int BALL_HEIGHT = 30;
 
-	Ball(const float& xPos, const float& yPos, const std::vector<Obstacle*>& obstacles, Portal* EntryPortal, Portal* ExitPortal);
+	Ball(const float& xPos, const float& yPos);
 	~Ball();
 
 	void init();
@@ -57,6 +58,7 @@ public:
 	void render();
 
 	void updateCamera();
-	void reset(const float& xPos, const float& yPos);
+	void reset(); 
 	bool stop();
+	bool checkWaterDrop();
 };

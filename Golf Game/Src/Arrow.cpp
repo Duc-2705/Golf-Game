@@ -1,9 +1,12 @@
 #include "Arrow.h"
 #include "Utilities.h"
+#include "Map.h"
 
-Arrow::Arrow(Ball* ball)
+extern Map* map;
+
+Arrow::Arrow()
 {
-	this->ball = ball;
+
 }
 
 Arrow::~Arrow()
@@ -28,8 +31,8 @@ void Arrow::init()
 
 void Arrow::update()
 {
-	destArrow.x = ball->center.x;
-	destArrow.y = ball->center.y - destArrow.h/2;
+	destArrow.x = map->ball->center.x;
+	destArrow.y = map->ball->center.y - destArrow.h/2;
 }
 
 void Arrow::setAngle(double angle)

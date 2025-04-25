@@ -3,10 +3,11 @@
 #include "Utilities.h"
 #include "Map.h"
 
-Cursor::Cursor(Ball* ball)
+extern Map* map;
+
+Cursor::Cursor()
 {
-	this->ball = ball;
-	arrow = new Arrow(ball);
+	arrow = new Arrow();
 	arrow->init();
 }
 
@@ -65,8 +66,8 @@ void Cursor::updateCamera()
 	Vector2D v(xMouseDown - xMouseState, yMouseDown - yMouseState);
 
 	float radius = std::min(100.0f, v.magnitude);
-	float targetCenterX = ball->center.x + v.i * radius;
-	float targetCenterY = ball->center.y + v.j * radius;
+	float targetCenterX = map->ball->center.x + v.i * radius;
+	float targetCenterY = map->ball->center.y + v.j * radius;
 
 	Game::camera.x = lerp(Game::camera.x, targetCenterX - Game::camera.w / 2, 0.1f);
 	Game::camera.x = std::max(0.0f, std::min(Game::camera.x, Map::MAP_WIDTH - Game::camera.w));
