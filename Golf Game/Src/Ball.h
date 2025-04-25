@@ -24,6 +24,8 @@ private:
 	SDL_Rect srcBall;
 	SDL_FRect destBall;
 
+	float xSpawn, ySpawn;
+
 	SDL_Texture* texBall = nullptr;
 
 	std::vector<bool> isAbleToCollide;
@@ -56,7 +58,7 @@ public:
 	void render();
 
 	void updateCamera();
-	void reset(const float& xPos, const float& yPos);
+	void reset(); 
 	bool stop();
 	bool checkWaterDrop();
 };

@@ -1,7 +1,8 @@
 #include "PowerBar.h"
 #include "Utilities.h"
+#include "Map.h"
 
-extern Ball* ball;
+extern Map* map;
 
 PowerBar::PowerBar()
 {
@@ -31,7 +32,7 @@ void PowerBar::init()
 
 void PowerBar::update()
 {
-	power = ball->cursor->getPercentageMagForce();
+	power = map->ball->cursor->getPercentageMagForce();
 
 	srcMaxBar.h = static_cast<int>(srcBar.h * power);
 	srcMaxBar.y = static_cast<int>(srcBar.y + srcBar.h - srcBar.h * power);

@@ -4,16 +4,15 @@
 #include "Map.h"
 #include "Utilities.h"
 
-extern Portal* EntryPortal, * ExitPortal;
-extern std::vector<Obstacle*> obstacles;
 extern Map* map;
 
 Ball::Ball(const float& xPos, const float& yPos)
 {
-	position.x = xPos;
-	position.y = yPos;
+	position.x = xSpawn = xPos;
+	position.y = ySpawn = yPos;
 
-	for (int i = 0; i < obstacles.size(); i++)
+
+	for (int i = 0; i < map->obstacles.size(); i++)
 	{
 		isAbleToCollide.push_back(1);
 	}
@@ -85,11 +84,11 @@ void Ball::update()
 
 void Ball::collisionHandling()
 {
-	for (int i = 0; i < obstacles.size(); i++)
+	for (int i = 0; i < map->obstacles.size(); i++)
 	{
-		if (isAbleToCollide[i] && Collision::checkCollisionObstacle(*this, *obstacles[i]) != -1) // Va cham voi obstacle i
+		if (isAbleToCollide[i] && Collision::checkCollisionObstacle(*this, *(map->obstacles[i])) != -1) // Va cham voi obstacle i
 		{
-			Obstacle* obstacle = obstacles[i];
+			Obstacle* obstacle = map->obstacles[i];
 			int index = Collision::checkCollisionObstacle(*this, *obstacle); // Va cham voi mp index
 
 			//Phan xa guong
@@ -106,7 +105,7 @@ void Ball::collisionHandling()
 
 			std::cout << obstacle->normal.i << " " << obstacle->normal.j << " Collision plane " << index << std::endl;
 		}
-		else if (!isAbleToCollide[i] && Collision::checkCollisionObstacle(*this, *obstacles[i]) == -1) isAbleToCollide[i] = true;
+		else if (!isAbleToCollide[i] && Collision::checkCollisionObstacle(*this, *(map->obstacles[i])) == -1) isAbleToCollide[i] = true;
 	}
 }
 
@@ -177,10 +176,10 @@ void Ball::playChunk(Mix_Chunk* chunk,const float& veloMag, const int& loops)
 	Mix_PlayChannel(-1, chunk, loops);
 }
 
-void Ball::reset(const float& xPos, const float& yPos)
+void Ball::reset()
 {
-	position.x = xPos;
-	position.y = yPos;
+	position.x = xSpawn;
+	position.y = ySpawn;
 
 	velocity.Zero();
 
@@ -189,6 +188,9 @@ void Ball::reset(const float& xPos, const float& yPos)
 
 	Game::remainingShots = 3;
 	waterDrop = false;
+
+	Game::camera.x = std::max(0.0f, std::min(center.x - Game::WINDOW_WIDTH / 2, Map::MAP_WIDTH - Game::camera.w));
+	Game::camera.y = std::max(0.0f, std::min(center.y - Game::WINDOW_HEIGHT / 2, Map::MAP_HEIGHT - Game::camera.h));
 }
 
 bool Ball::stop()
@@ -198,12 +200,12 @@ bool Ball::stop()
 
 void Ball::teleport()
 {
-	if ((position.x >= EntryPortal->position.x && position.x <= EntryPortal->position.x + EntryPortal->PORTAL_WIDTH) &&
-		(position.y >= EntryPortal->position.y && position.y <= EntryPortal->position.y + EntryPortal->PORTAL_HEIGHT))
+	if ((position.x >= map->EntryPortal->position.x && position.x <= map->EntryPortal->position.x + map->EntryPortal->PORTAL_WIDTH) &&
+		(position.y >= map->EntryPortal->position.y && position.y <= map->EntryPortal->position.y + map->EntryPortal->PORTAL_HEIGHT))
 	{
 		std::cout << "Teleport" << std::endl;
-		position.x += ExitPortal->position.x - EntryPortal->position.x + BALL_WIDTH/2;
-		position.y += ExitPortal->position.y - EntryPortal->position.y + BALL_HEIGHT/2;
+		position.x += map->ExitPortal->position.x - map->EntryPortal->position.x + BALL_WIDTH/2;
+		position.y += map->ExitPortal->position.y - map->EntryPortal->position.y + BALL_HEIGHT/2;
 	}
 }
 

@@ -33,6 +33,8 @@ public:
 
 	static int remainingShots;
 
+	static int currentLevel;
+
 	Game();
 	~Game();
 
