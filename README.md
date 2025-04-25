@@ -44,4 +44,21 @@ Khi thả chuột, bóng được bắn ra theo hướng ngược lại với h�
 
 Camera sẽ zoom theo hướng kéo để hỗ trợ nhắm chính xác.
 
+## b. Hole (Lỗ) ![Image](https://github.com/user-attachments/assets/a557340d-12da-4e4c-83d2-268c0b368b5d)
+
+Là điểm kết thúc của mỗi màn chơi.
+
+Khi bóng được đánh vào lỗ, màn chơi được xem là hoàn thành.
+
+Thường được đặt ở vị trí khó tiếp cận để tăng độ thử thách.
+
+## c. Obstacle (Chướng ngại vật)
+
+Mỗi màn chơi sẽ xuất hiện một số chướng ngại vật làm cản trở đường đi của bóng nhằm tạo thử thách cho người chơi.
+
+Có thể cản bóng, làm đổi hướng và giảm lực của bóng khi bị va vào.
+
+Đôi lúc, chướng ngại vật lại trở nên rất hữu ích nếu bạn biết vận dụng đúng cách.
+
+## d. Teleport Portal (Cổng dịch chuyển)
 
