@@ -33,7 +33,7 @@ void Map::loadMapLvl(const int& level)
 		hole->init();
 
 		EntryPortal = new Portal("assets/EntryPortal.png", 800, 500, 80, 80);
-		ExitPortal = new Portal("assets/ExitPortal.png", 900, 220, 80, 80);
+		ExitPortal = new Portal("assets/ExitPortal.png", 900, 40, 80, 80);
 	}
 
 	else if (level == 1)

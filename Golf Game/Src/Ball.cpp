@@ -225,7 +225,6 @@ void Ball::handleCollisionTiles()
 	}
 	FRICTION = (check) ? -200.0f : -80.0f;
 
-	std::cout << FRICTION << std::endl;
 }
 
 bool Ball::checkWaterDrop()
