@@ -78,3 +78,18 @@ Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển h
 Water: nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
 # 3. Cách chơi
+
+Với mỗi màn người chơi sẽ có 3 lượt đánh bóng. Nếu sau 3 lượt đánh, bóng không đén được lỗ thì người chơi coi như thưa cuộc.
+
+Số lượng lượt đánh còn lại sẽ được hiển thị ở góc phải trên màn hình. ![Image](https://github.com/user-attachments/assets/bb695dab-749d-411c-91a4-64bde02c3e60)
+
+Chỉ khi nào bóng dừng bạn mới được đánh tiếp.
+
+Dánh bóng bằng cách kéo chuột để điều chỉnh hướng và lực đánh (Kéo càng xa thì đánh càng mạnh).
+
+Trong quá trình ngắm, sẽ xuất hiện mũi tên chỉ hướng bóng sẽ đi, đồng thời camera sẽ lia theo hướng đó để tăng phạm vi map có thể nhìn thấy giúp bạn ngắm chính xác hơn.
+
+Khi thả chuột, bóng được băn đi theo hướng mũi tên. Camera sẽ follow theo quả bóng.
+
+
+
