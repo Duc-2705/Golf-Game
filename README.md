@@ -53,7 +53,7 @@ Thường được đặt ở vị trí khó tiếp cận để tăng độ th�
 
 ## c. Obstacle (Chướng ngại vật)
 
-Mỗi màn chơi sẽ xuất hiện một số chướng ngại vật làm cản trở đường đi của bóng nhằm tạo thử thách cho người chơi.
+Mỗi màn chơi sẽ xuất hiện một số chướng ngại vật với nhiều hình dạng, làm cản trở đường đi của bóng nhằm tạo thử thách cho người chơi.
 
 Có thể cản bóng, làm đổi hướng và giảm lực của bóng khi bị va vào.
 
@@ -77,3 +77,4 @@ Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển h
 
 Water: nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
+# 3. Cách chơi
