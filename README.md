@@ -73,7 +73,7 @@ Người chơi có thể vận dụng để vượt những chướng ngại v�
 
 Grass: là nơi bóng có thể di chuyển.
 
-Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển hơn do ma sát.
+Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển hơn do ma sát lớn.
 
 Water: nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
@@ -87,9 +87,11 @@ Chỉ khi nào bóng dừng bạn mới được đánh tiếp.
 
 Dánh bóng bằng cách kéo chuột để điều chỉnh hướng và lực đánh (Kéo càng xa thì đánh càng mạnh).
 
-Trong quá trình ngắm, sẽ xuất hiện mũi tên chỉ hướng bóng sẽ đi, đồng thời camera sẽ lia theo hướng đó để tăng phạm vi map có thể nhìn thấy giúp bạn ngắm chính xác hơn.
+Trong quá trình ngắm, sẽ xuất hiện mũi tên chỉ hướng bóng sẽ đi, đồng thời camera sẽ lia theo hướng đó để tăng phạm 
+vi map có thể nhìn thấy giúp bạn ngắm chính xác hơn.
 
 Khi thả chuột, bóng được băn đi theo hướng mũi tên. Camera sẽ follow theo quả bóng.
 
+Trong quá trình di chuyển, vận tốc của bóng sẽ giảm dần do ma sát, hướng của bóng sẽ thay đổi nếu va phải chướng ngại vật.
 
-
+Người chơi sẽ chiến thắng nếu bóng đến được lỗ.
