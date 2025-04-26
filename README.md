@@ -69,6 +69,10 @@ Giữ nguyên hướng di chuyển và vận tốc hiện tại của bóng sau 
 
 Người chơi có thể vận dụng để vượt những chướng ngại vật mà không thể đi qua.
 
+## e. Power Bar (Thanh lực)
+
+Độ lớn của PowerBar càng cao thì lực đánh càng mạnh, bóng sẽ bay xa hơn.
+
 ## e. Map (Bản đồ)
 
 Grass: là nơi bóng có thể di chuyển.
@@ -93,5 +97,7 @@ vi map có thể nhìn thấy giúp bạn ngắm chính xác hơn.
 Khi thả chuột, bóng được băn đi theo hướng mũi tên. Camera sẽ follow theo quả bóng.
 
 Trong quá trình di chuyển, vận tốc của bóng sẽ giảm dần do ma sát, hướng của bóng sẽ thay đổi nếu va phải chướng ngại vật.
+
+Nếu bóng rơi xuống nước, bạn sẽ thua cuộc.
 
 Người chơi sẽ chiến thắng nếu bóng đến được lỗ.
