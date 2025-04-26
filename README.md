@@ -75,11 +75,11 @@ Người chơi có thể vận dụng để vượt những chướng ngại v�
 
 ## e. Map (Bản đồ)
 
-Grass: là nơi bóng có thể di chuyển.
+Grass ![Image](https://github.com/user-attachments/assets/ec4b2193-8a03-4351-80c5-c4a681ed2a5a) : là nơi bóng có thể di chuyển.
 
-Sand: cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển hơn do ma sát lớn.
+Sand ![Image](https://github.com/user-attachments/assets/52bd279a-b8b8-426f-b882-1facf8376b62) : cũng là nơi bóng có thể di chuyển, nhưng sẽ khó di chuyển hơn do ma sát lớn.
 
-Water: nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
+Water ![Image](https://github.com/user-attachments/assets/dde10030-e520-4626-bf15-5fdcf12afd7b) : nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
 # 3. Cách chơi
 
