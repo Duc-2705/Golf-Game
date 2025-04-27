@@ -203,6 +203,8 @@ void Game::update()
 		for (auto& obstacle : map->obstacles) obstacle->update();
 
 		map->ball->update();
+
+		map->marker->update();
 		
 		powerBar->update();
 
@@ -276,6 +278,9 @@ void Game::render()
 		map->ExitPortal->render();
 
 		map->ball->render();
+		
+		map->marker->render();
+
 		powerBar->render();
 		shots->render();
 
@@ -298,6 +303,8 @@ void Game::render()
 
 		map->EntryPortal->render();
 		map->ExitPortal->render();
+
+		map->marker->render();
 
 		powerBar->render();
 		shots->render();
