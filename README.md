@@ -33,7 +33,7 @@ Lúc này sẽ xuất hiên một button tường ứng với các màn chơi c�
 
 # 2. Các thành phần trong game
 
-## a. Ball (Bóng) ![Image](https://github.com/user-attachments/assets/9bb390bb-0738-4124-9550-36bc037ae664)
+## a. Ball (Bóng) <img src="https://github.com/user-attachments/assets/9bb390bb-0738-4124-9550-36bc037ae664" width="30">
 
 Là đối tượng chính mà người chơi điều khiển.
 
@@ -69,9 +69,19 @@ Giữ nguyên hướng di chuyển và vận tốc hiện tại của bóng sau 
 
 Người chơi có thể vận dụng để vượt những chướng ngại vật mà không thể đi qua.
 
-## e. Power Bar (Thanh lực)
+## e. Power Bar (Thanh lực)   <img src="https://github.com/user-attachments/assets/2a900f39-088c-403c-b96b-044d6b583ebb" alt="Power Bar" width="10" style="float: right; margin-left: 50px;">
+  
+Hiện thị độ lớn lực đánh hiện tại của người chơi.
+  
+Khi kéo chuột, Power Bar sẽ tăng dần theo khoảng cách kéo, giúp người chơi dễ dàng canh lực đánh chính xác.
 
-Độ lớn của PowerBar càng cao thì lực đánh càng mạnh, bóng sẽ bay xa hơn.
+Power Bar có thể có các mức:
+
+  Màu xanh lá: Lực nhẹ.
+
+  Màu vàng: Lực trung bình.
+
+  Màu đỏ: Lực mạnh.   
 
 ## e. Map (Bản đồ)
 
@@ -85,7 +95,7 @@ Water ![Image](https://github.com/user-attachments/assets/dde10030-e520-4626-bf1
 
 Với mỗi màn người chơi sẽ có 3 lượt đánh bóng. Nếu sau 3 lượt đánh, bóng không đén được lỗ thì người chơi coi như thưa cuộc.
 
-Số lượng lượt đánh còn lại sẽ được hiển thị ở góc phải trên màn hình. ![Image](https://github.com/user-attachments/assets/bb695dab-749d-411c-91a4-64bde02c3e60)
+Số lượng lượt đánh còn lại sẽ được hiển thị ở góc phải trên màn hình.  <img src="https://github.com/user-attachments/assets/bb695dab-749d-411c-91a4-64bde02c3e60" width="70">
 
 Chỉ khi nào bóng dừng bạn mới được đánh tiếp.
 
