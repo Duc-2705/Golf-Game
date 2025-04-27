@@ -37,6 +37,7 @@ Mix_Chunk* Game::chunkHit = nullptr;
 Mix_Chunk* Game::chunkDrop = nullptr;
 Mix_Chunk* Game::chunkCollide = nullptr;
 Mix_Chunk* Game::chunkWaterDrop = nullptr;
+Mix_Chunk* Game::buttonClick = nullptr;
 
 enum GameState { Menu, Playing, Level, Pause, GameOver };
 GameState currentState = Menu;
@@ -74,6 +75,7 @@ void Game::init(const char* title, bool fullscreen)
 	chunkDrop = Mix_LoadWAV("sound/hole_drop.wav");
 	chunkCollide = Mix_LoadWAV("sound/bass.wav");
 	chunkWaterDrop = Mix_LoadWAV("sound/water_drop.wav");
+	buttonClick = Mix_LoadWAV("sound/ButtonClick.wav");
 
 	font = TTF_OpenFont("font/arial.ttf", 24);
 
@@ -340,6 +342,7 @@ void Game::clean()
 	Mix_FreeChunk(chunkDrop);
 	Mix_FreeChunk(chunkCollide);
 	Mix_FreeChunk(chunkWaterDrop);
+	Mix_FreeChunk(buttonClick);
 
 	TTF_CloseFont(font);
 

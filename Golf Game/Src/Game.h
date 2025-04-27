@@ -23,6 +23,7 @@ public:
 	static Mix_Chunk* chunkDrop;
 	static Mix_Chunk* chunkCollide;
 	static Mix_Chunk* chunkWaterDrop;
+	static Mix_Chunk* buttonClick;
 
 	static SDL_Event event;
 	static SDL_Renderer* renderer;
