@@ -4,6 +4,7 @@
 #include "Ball.h"
 #include "Hole.h"
 #include "Tile.h"
+#include "HoleMarker.h"
 #include <vector>
 
 class Map
@@ -22,6 +23,8 @@ public:
 
 	Ball* ball = nullptr;
 	Hole* hole = nullptr;
+
+	HoleMarker* marker = nullptr;
 
 	Portal* EntryPortal = nullptr, * ExitPortal = nullptr;
 	

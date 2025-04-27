@@ -38,6 +38,7 @@ void Button::handleEvent(SDL_Event& event)
 			yMouse >= position.y && yMouse <= position.y + BUTTON_HEIGHT)
 		{
 			mouseDown = true;
+			Mix_PlayChannel(-1, Game::buttonClick, 0);
 		}
 		break;
 

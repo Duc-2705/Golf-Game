@@ -27,6 +27,7 @@
     <ClCompile Include="Src\Cursor.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\Hole.cpp" />
+    <ClCompile Include="Src\HoleMarker.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\Map.cpp" />
     <ClCompile Include="Src\Obstacle.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\Cursor.h" />
     <ClInclude Include="Src\Hole.h" />
+    <ClInclude Include="Src\HoleMarker.h" />
     <ClInclude Include="Src\Map.h" />
     <ClInclude Include="Src\Obstacle.h" />
     <ClInclude Include="Src\PowerBar.h" />
@@ -70,7 +72,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -78,14 +80,14 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -93,7 +95,7 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

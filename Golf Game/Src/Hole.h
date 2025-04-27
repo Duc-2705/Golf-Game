@@ -13,6 +13,9 @@ private:
 	SDL_FRect destHole;
 
 public:
+	const float HOLE_WIDTH = Ball::BALL_WIDTH;
+	const float HOLE_HEGHT = Ball::BALL_HEIGHT;
+
 	Vector2D position;
 
 	Hole(const float& x, const float& y);

@@ -32,6 +32,8 @@ void Map::loadMapLvl(const int& level)
 		hole = new Hole(1000.0f, 100.0f);
 		hole->init();
 
+		marker = new HoleMarker();
+
 		EntryPortal = new Portal("assets/EntryPortal.png", 800, 500, 80, 80);
 		ExitPortal = new Portal("assets/ExitPortal.png", 900, 40, 80, 80);
 	}
@@ -48,6 +50,8 @@ void Map::loadMapLvl(const int& level)
 
 		hole = new Hole(1000.0f, 100.0f);
 		hole->init();
+
+		marker = new HoleMarker();
 
 		EntryPortal = new Portal("assets/EntryPortal.png", 800, 600, 80, 80);
 		ExitPortal = new Portal("assets/ExitPortal.png", 800, 200, 80, 80);
@@ -69,6 +73,8 @@ void Map::loadMapLvl(const int& level)
 
 		hole = new Hole(750.0f, 150.0f);
 		hole->init();
+
+		marker = new HoleMarker();
 
 		EntryPortal = new Portal("assets/EntryPortal.png", 480, 475, 80, 80);
 		ExitPortal = new Portal("assets/ExitPortal.png", 600, 160, 80, 80);
@@ -119,6 +125,7 @@ void Map::clear()
 
 	if (ball) delete ball;
 	if (hole) delete hole;
+	if (marker) delete marker;
 
 	for (auto obstacle : obstacles) delete obstacle;
 	obstacles.clear();
