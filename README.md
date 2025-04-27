@@ -27,7 +27,7 @@ Click vào nút “PLAY” để bắt đầu chơi game.
 
 </div>
 
-Lúc này sẽ xuất hiên một button tường ứng với các màn chơi có độ khác khác nhau, người chơi click vào 1 trong các màn để bắt đầu chơi.
+Lúc này sẽ xuất hiên 3 button tường ứng với các màn chơi có độ khó khác nhau, người chơi click vào 1 trong các màn để bắt đầu chơi.
 
 ![Image](https://github.com/user-attachments/assets/43336e5d-f403-4d8e-853b-f65c250719ce)
 
@@ -51,7 +51,7 @@ Khi bóng được đánh vào lỗ, màn chơi được xem là hoàn thành.
 
 Thường được đặt ở vị trí khó tiếp cận để tăng độ thử thách.
 
-## c. Obstacle (Chướng ngại vật)
+## c. Obstacle (Chướng ngại vật) <img src="https://github.com/user-attachments/assets/89f1aad3-8b7a-4883-a87b-a33b086fef84" width="30">
 
 Mỗi màn chơi sẽ xuất hiện một số chướng ngại vật với nhiều hình dạng, làm cản trở đường đi của bóng nhằm tạo thử thách cho người chơi.
 
@@ -61,7 +61,7 @@ Có thể cản bóng, làm đổi hướng và giảm lực của bóng khi b�
 
 ## d. Teleport Portal (Cổng dịch chuyển)
 
-Là cặp cổng Entry Portal và Exit Portal, dùng để dịch chuyển bóng từ vị trí này sang vị trí khác trong bản đồ.
+Là cặp cổng Entry Portal ![Image](https://github.com/user-attachments/assets/b0353f23-3cb8-4cb0-a3a8-51e6413b0e6b)  và Exit Portal ![Image](https://github.com/user-attachments/assets/370f4513-9fb7-4529-b431-3c8ff7dbd3ce) , dùng để dịch chuyển bóng từ vị trí này sang vị trí khác trong bản đồ.
 
 Khi bóng chạm vào cổng vào (Entry portal), nó sẽ ngay lập tức xuất hiện tại vị trí của cổng ra (Exit portal).
 
@@ -83,6 +83,14 @@ Power Bar có thể có các mức:
 
   Màu đỏ: Lực mạnh.   
 
+## f. Hole Marker <img src="https://github.com/user-attachments/assets/2ee3aa2e-b28b-4874-b05f-4f75b7bc6085" width="20">
+
+Là dấu chấm đỏ được dùng để hiện thị vị trí của Hole trong bản đồ khi Hole không nằm trong phạm vi khung hình của camera người chơi.
+
+Thường nằm trên viền khung hình camera.
+
+Giúp người chơi xác định được phương hướng khi đánh bóng
+
 ## e. Map (Bản đồ)
 
 Grass ![Image](https://github.com/user-attachments/assets/ec4b2193-8a03-4351-80c5-c4a681ed2a5a) : là nơi bóng có thể di chuyển.
@@ -93,15 +101,15 @@ Water ![Image](https://github.com/user-attachments/assets/dde10030-e520-4626-bf1
 
 # 3. Cách chơi
 
-Với mỗi màn người chơi sẽ có 3 lượt đánh bóng. Nếu sau 3 lượt đánh, bóng không đén được lỗ thì người chơi coi như thưa cuộc.
+Với mỗi màn người chơi sẽ có 3 lượt đánh bóng. Nếu sau 3 lượt đánh, bóng không đén được lỗ thì người chơi coi như thua cuộc.
 
 Số lượng lượt đánh còn lại sẽ được hiển thị ở góc phải trên màn hình.  <img src="https://github.com/user-attachments/assets/bb695dab-749d-411c-91a4-64bde02c3e60" width="70">
 
 Chỉ khi nào bóng dừng bạn mới được đánh tiếp.
 
-Dánh bóng bằng cách kéo chuột để điều chỉnh hướng và lực đánh (Kéo càng xa thì đánh càng mạnh).
+Đánh bóng bằng cách kéo chuột để điều chỉnh hướng và lực đánh (Kéo càng xa thì đánh càng mạnh).
 
-Trong quá trình ngắm, sẽ xuất hiện mũi tên chỉ hướng bóng sẽ đi, đồng thời camera sẽ lia theo hướng đó để tăng phạm 
+Trong quá trình ngắm, sẽ xuất hiện mũi tên chỉ hướng bóng sẽ đi, đồng thời Camera sẽ lia theo hướng đó để tăng phạm 
 vi map có thể nhìn thấy giúp bạn ngắm chính xác hơn.
 
 Khi thả chuột, bóng được băn đi theo hướng mũi tên. Camera sẽ follow theo quả bóng.
