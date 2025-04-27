@@ -1,6 +1,6 @@
 # ⛳ MINIGOLF
 
-- Thử nghiệm game: 
+[Video giới thiệu Game](https://drive.google.com/drive/folders/1gwVf35YBsTHdT936Ae66LMO60ZXYEQBi?hl=vi)
 
 # Giới thiệu game
 
@@ -99,7 +99,7 @@ Sand ![Image](https://github.com/user-attachments/assets/52bd279a-b8b8-426f-b882
 
 Water ![Image](https://github.com/user-attachments/assets/dde10030-e520-4626-bf15-5fdcf12afd7b) : nếu bóng rơi xuống nước, bạn sẽ bị coi là thua cuộc.
 
-# 3. Cách chơi
+# 3. Cách chơi và luật chơi
 
 Với mỗi màn người chơi sẽ có 3 lượt đánh bóng. Nếu sau 3 lượt đánh, bóng không đén được lỗ thì người chơi coi như thua cuộc.
 
@@ -120,7 +120,7 @@ Nếu bóng rơi xuống nước, bạn sẽ thua cuộc.
 
 Người chơi sẽ chiến thắng nếu bóng đến được lỗ.
 
-# 🌟 Một só tính năng dự kiến phát triển trong tương lai
+# 🌟 Một số tính năng dự kiến phát triển trong tương lai
 
 Thêm các màn chơi mới với địa hình phong phú, chướng ngại vật đa dạng và độ khó tăng dần.
 
