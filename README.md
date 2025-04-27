@@ -119,3 +119,17 @@ Trong quá trình di chuyển, vận tốc của bóng sẽ giảm dần do ma s
 Nếu bóng rơi xuống nước, bạn sẽ thua cuộc.
 
 Người chơi sẽ chiến thắng nếu bóng đến được lỗ.
+
+# 🌟 Một só tính năng dự kiến phát triển trong tương lai
+
+Thêm các màn chơi mới với địa hình phong phú, chướng ngại vật đa dạng và độ khó tăng dần.
+
+Thêm các obstacle có thể di chuyển hoặc thay đổi vị trí theo thời gian.
+
+# Reference
+
+Sprites sources: 
+[https:://itch.io](https://itch.io)
+
+Sounds sources:
+[https://pixabay.com/sound-effects/](https://pixabay.com/sound-effects/)
