@@ -1,6 +1,6 @@
 # ⛳ MINIGOLF
 
-[Video giới thiệu Game](https://www.youtube.com/watch?v=eDnvOL3ozGE)
+[Video giới thiệu Game](https://www.youtube.com/watch?v=E-jn7u3Zl58)
 
 # Giới thiệu game
 
